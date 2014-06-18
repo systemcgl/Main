@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-package systemcgl;
+package br.com.systemcgl;
 import systemcgl.screens.*;
 import systemcgl.controle.*;
 

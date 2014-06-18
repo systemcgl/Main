@@ -7,8 +7,7 @@
 package systemcgl.screens;
 
 import javax.swing.JOptionPane;
-import systemcgl.Fachada;
-import systemcgl.Systemcgl;
+import systemcgl.*;
 
 /**
  *

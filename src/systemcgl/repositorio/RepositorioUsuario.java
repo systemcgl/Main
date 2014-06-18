@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package dados;
+package systemcgl.repositorio;
 import systemcgl.entidades.Usuario;
 
 /**
  *
  * @author zare
  */
-public class DadosUsuario  {
+public class RepositorioUsuario  {
     
 }
