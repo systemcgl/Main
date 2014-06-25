@@ -14,22 +14,28 @@ public class Usuario {
 
 
     
-    private String nome;
-    private String id;
-    private String senha;
+    protected String nome;
+    protected String id;
+    protected String senha;
+
+    
 
    
-    private String tipo;
+
+   
+    protected  String tipo = "usuario";
 
       public Usuario() {
         
     }
-    
-    public Usuario(String nome, String id, String senha, String tipo) {
+   
+   
+      
+    public Usuario(String nome, String id, String senha) {
         this.nome = nome;
         this.id = id;
         this.senha = senha;
-        this.tipo = tipo;
+        
     }
     
         public String getNome() {
@@ -56,7 +62,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-
+ public String getTipo() {
+        return tipo;
+    }
     
-    
+   public void setTipo(String tipo) {
+        this.tipo = tipo;
+    } 
 }

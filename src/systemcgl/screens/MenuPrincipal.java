@@ -6,6 +6,10 @@
 
 package systemcgl.screens;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author zare
@@ -36,8 +40,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        EditUser = new javax.swing.JMenu();
+        CadUser = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -86,17 +91,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Editar");
+        EditUser.setText("Editar");
 
-        jMenuItem3.setText("Adicionar usuário");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        CadUser.setText("Adicionar usuário");
+        CadUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                CadUserActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        EditUser.add(CadUser);
 
-        jMenuBar1.add(jMenu3);
+        jMenuItem4.setText("Editar usuários");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        EditUser.add(jMenuItem4);
+
+        jMenuBar1.add(EditUser);
 
         jMenu4.setText("Ferramentas");
         jMenuBar1.add(jMenu4);
@@ -130,7 +143,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void CadUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadUserActionPerformed
     //Cadastro de usuario
     
     //Desabilitando janela principal
@@ -139,7 +152,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TelaCadUser cadUser = new TelaCadUser(this);
         cadUser.setVisible(true);
           
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_CadUserActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // Abre tela para editar usuários
+        this.setEnabled(false);
+       
+        TelaUsers users = null;
+        try {
+            new TelaUsers(this).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,17 +206,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CadUser;
+    private javax.swing.JMenu EditUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

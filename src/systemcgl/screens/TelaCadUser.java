@@ -6,6 +6,8 @@
 
 package systemcgl.screens;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import systemcgl.*;
 
@@ -119,7 +121,7 @@ public class TelaCadUser extends javax.swing.JFrame {
                         .addComponent(BotaoCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BotaoCriar)
-                        .addGap(0, 96, Short.MAX_VALUE))
+                        .addGap(0, 136, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +135,7 @@ public class TelaCadUser extends javax.swing.JFrame {
                             .addComponent(campoNome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(campoConfSenha)
                             .addComponent(campoSenha))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoCancelar, BotaoCriar});
@@ -205,19 +207,24 @@ public class TelaCadUser extends javax.swing.JFrame {
         String senha = new String (senhaChar);
         char[] confSenhaChar = campoConfSenha.getPassword();
         String confSenha = new String(confSenhaChar);
+        System.out.println( "Criou variáveis: Nome: "+nome + " ID: " + id + " Senha:  ******"  + " Confirmação de senha: ******" );
         // Tratamento de fluxos secundarios e envio das informaçoes
          if (senha.equals(confSenha) == false) {
                 JOptionPane.showMessageDialog(null, "A Senha e a Confirmação de Senha não Coincidem!!");
             } else {
              Fachada f = new Fachada();
-             if( f.criarUsuario(nome, id, senha) == true){
-             JOptionPane.showMessageDialog(null, "Usuário Criado com Sucesso!!");
-             System.out.println( "Criou variáveis: Nome: "+nome + " ID: " + id + " Senha:  ******"  + " Confirmação de senha: ******" );
-             this.dispose();
-             telaAnterior.setEnabled(true);
-             }else {
-                 JOptionPane.showMessageDialog(null, "Você deixou algum campo em branco!!");
-             }
+            try {
+                if( f.cadUser(nome, id, senha) == true){
+                    JOptionPane.showMessageDialog(null, "Usuário Criado com Sucesso!!");
+                   
+                    this.dispose();
+                    telaAnterior.setEnabled(true);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Você deixou algum campo em branco!!");
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaCadUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         
            

@@ -5,9 +5,12 @@
  * and open the template in the editor.
  */
 
-package br.com.systemcgl;
+package systemcgl;
+import java.sql.*;
 import systemcgl.screens.*;
 import systemcgl.controle.*;
+import systemcgl.repositorio.*;
+
 
 /**
  *
@@ -15,17 +18,19 @@ import systemcgl.controle.*;
  */
 public class Systemcgl {
 
+     
     /**
      * @param args the command line arguments
+     * @throws java.lang.ClassNotFoundException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException  {
  
+       
+        TelaLogin login = new TelaLogin();
+        login.setVisible(true);
         
-       // InterfaceLogin login = new InterfaceLogin();
-       //login.setVisible(true);
-        
-     MenuPrincipal inicial = new MenuPrincipal();
-     inicial.setVisible(true);
+    // MenuPrincipal inicial = new MenuPrincipal();
+     //inicial.setVisible(true);
         
     }
     
