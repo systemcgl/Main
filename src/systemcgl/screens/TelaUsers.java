@@ -10,7 +10,10 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import javax.swing.JOptionPane;
+=======
+>>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -215,6 +218,7 @@ public class TelaUsers extends javax.swing.JFrame {
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
         try {
             // Deletar o Usuario 
+<<<<<<< HEAD
             int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do usuário?", "Excluir", JOptionPane.YES_NO_OPTION);  
         if (resp == JOptionPane.YES_NO_OPTION) {  
             f.rmUsr(usr); 
@@ -222,6 +226,9 @@ public class TelaUsers extends javax.swing.JFrame {
             
         }  
             
+=======
+            f.rmUsr(usr);
+>>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
         }
