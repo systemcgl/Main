@@ -65,4 +65,20 @@ public class ControleUsuario {
       
   }
   
+  
+  public boolean rmUser ( Usuario usr) throws ClassNotFoundException{
+      
+      
+     RepositorioUsuario ru = new RepositorioUsuario();
+     
+     ru.removeUsrDB(usr.getId());
+     
+     
+     return true; 
+      
+  }
+          
+          
+          
+  
 }

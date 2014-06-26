@@ -48,7 +48,7 @@ public class RepositorioUsuario  {
         try {
             pst = conect.prepareStatement(sql);
             rs = pst.executeQuery();
-            System.out.println("Recebendo lista de usuários do DB... ");
+            System.out.println("Recebendo lista de usuários do BD... ");
 
             return rs;
 
@@ -82,10 +82,10 @@ public class RepositorioUsuario  {
         
     }
             
-    public void altSenhaDb  (String id, String senha) throws ClassNotFoundException{
+    public void altSenhaDb(String id, String senha) throws ClassNotFoundException {
         conect = ConectaBD.conect();
         String sql = "update usuario set senha=? where idUsuario=?";
-        
+
         try {
             pst = conect.prepareStatement(sql);
             pst.setString(1, senha);
@@ -94,7 +94,27 @@ public class RepositorioUsuario  {
         } catch (SQLException ex) {
             Logger.getLogger(RepositorioUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+   
     }
+    public void removeUsrDB (String id) throws ClassNotFoundException {
+       conect = ConectaBD.conect();
+       String sql = "delete from usuario where idUsuario=?";
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setString(1, id);
+            pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositorioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+       
+       
+      
+       
+               
+            
+            
+            
+       }
 }

@@ -126,7 +126,7 @@ public class TelaLogin extends javax.swing.JFrame {
             if (id.equals("") || pass.equals("")) {
                 JOptionPane.showMessageDialog(this, "Você deixou algo em branco?");
             } else {
-                if (f.cprSenha(usr)) {
+                if (f.login(usr)) {
                     MenuPrincipal inicial = new MenuPrincipal();
                     inicial.setVisible(true);
                     this.dispose();

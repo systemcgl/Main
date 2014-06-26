@@ -73,7 +73,7 @@ public class TelaUsers extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Fechar = new javax.swing.JButton();
         Editar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Remover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableUsuarios = new javax.swing.JTable();
 
@@ -104,7 +104,12 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Remover");
+        Remover.setText("Remover");
+        Remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +118,7 @@ public class TelaUsers extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Editar)
                 .addGap(98, 98, 98)
-                .addComponent(jButton1)
+                .addComponent(Remover)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                 .addComponent(Fechar))
         );
@@ -124,7 +129,7 @@ public class TelaUsers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Editar)
                     .addComponent(Fechar)
-                    .addComponent(jButton1))
+                    .addComponent(Remover))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -199,12 +204,22 @@ public class TelaUsers extends javax.swing.JFrame {
 
     private void JTableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableUsuariosMouseClicked
         int seleciona = JTableUsuarios.getSelectedRow();
-        //usr.setNome(JTableUsuarios.getModel().getValueAt(seleciona, 1).toString());
-        this.usr.setId(JTableUsuarios.getModel().getValueAt(seleciona, 2).toString());
-        //usr.setTipo(JTableUsuarios.getModel().getValueAt(seleciona, 3).toString());
+        //usr.setNome(JTableUsuarios.getModel().getValueAt(seleciona, 0).toString());
+        this.usr.setId(JTableUsuarios.getModel().getValueAt(seleciona, 1).toString());
+        //usr.setTipo(JTableUsuarios.getModel().getValueAt(seleciona, 2).toString());
         System.out.println(usr.getId());
-        
+        System.out.println("selecionou o usuario"+ usr.getId());
     }//GEN-LAST:event_JTableUsuariosMouseClicked
+
+    private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
+        try {
+            // Deletar o Usuario 
+            f.rmUsr(usr);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_RemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,7 +264,7 @@ public class TelaUsers extends javax.swing.JFrame {
     private javax.swing.JButton Editar;
     private javax.swing.JButton Fechar;
     private javax.swing.JTable JTableUsuarios;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Remover;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;

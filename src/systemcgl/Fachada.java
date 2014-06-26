@@ -19,6 +19,7 @@ public class Fachada {
     private Usuario usr = new Usuario();
     private ControleUsuario ctU = new ControleUsuario();
     private ControleSenha ctS = new ControleSenha();
+    private ControleSessao ctSs = new ControleSessao();
 
  
     
@@ -54,7 +55,8 @@ public class Fachada {
         
     }
     
-    public void login(){
+    public boolean login(Usuario usr) throws ClassNotFoundException{
+        return ctSs.abrirSessao(usr);
         
     }
     
@@ -62,8 +64,9 @@ public class Fachada {
         
     }
     
-    public void rmUser(){
+    public boolean rmUsr(Usuario usr) throws ClassNotFoundException{
         
+        return ctU.rmUser(usr);
     }
     
     public void cadEquip(){
