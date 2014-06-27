@@ -61,14 +61,21 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="Systemcgl"/>
+    <Property name="autoRequestFocus" type="boolean" value="false"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="96" green="78" red="5f" type="rgb"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -85,15 +92,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jToolBar1" alignment="0" pref="974" max="32767" attributes="0"/>
-          <Component id="jDesktopPane1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jDesktopPane" alignment="0" pref="974" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jToolBar1" min="-2" pref="55" max="-2" attributes="0"/>
-              <EmptySpace pref="196" max="32767" attributes="0"/>
-              <Component id="jDesktopPane1" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jDesktopPane" pref="228" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,6 +138,17 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="CadEquip">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cadastrar Equipamento"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadEquipActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Caixa"/>
@@ -144,7 +162,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JDesktopPane" name="jDesktopPane1">
+    <Component class="javax.swing.JDesktopPane" name="jDesktopPane">
     </Component>
   </SubComponents>
 </Form>

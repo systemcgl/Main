@@ -6,9 +6,12 @@
 
 package systemcgl.screens;
 
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -36,8 +39,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        CadEquip = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -48,8 +52,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Systemcgl");
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(95, 120, 150));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -71,6 +82,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2.setMaximumSize(new java.awt.Dimension(44, 44));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
+
+        CadEquip.setText("Cadastrar Equipamento");
+        CadEquip.setFocusable(false);
+        CadEquip.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CadEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CadEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadEquipActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(CadEquip);
 
         jButton3.setText("Caixa");
         jButton3.setFocusable(false);
@@ -127,14 +149,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,6 +197,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "Sair", JOptionPane.YES_NO_OPTION);
+                if (resp == JOptionPane.YES_NO_OPTION) {
+                    this.dispose();
+                }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void CadEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadEquipActionPerformed
+        // TODO add your handling code here:
+       // Dimension t = jDesktopPane.getSize();
+       TelaCadEquip cadEquip = new TelaCadEquip();
+       cadEquip.setVisible(true);
+       jDesktopPane.add(cadEquip);
+    }//GEN-LAST:event_CadEquipActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,12 +249,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CadEquip;
     private javax.swing.JMenuItem CadUser;
     private javax.swing.JMenu EditUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;

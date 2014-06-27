@@ -6,10 +6,16 @@
 
 package systemcgl.repositorio;
 
+import java.sql.*;
+
 /**
  *
  * @author zare
  */
 public class RepositorioEquipamento {
+     Connection conect;
+    PreparedStatement pst;
+    ResultSet rs;
+    
     
 }
