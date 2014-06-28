@@ -13,6 +13,7 @@ import java.sql.*;
  * @author zare
  */
 public class RepositorioEquipamento {
+<<<<<<< HEAD
     Connection conect;
     PreparedStatement pst;
     ResultSet rs;
@@ -38,5 +39,11 @@ public class RepositorioEquipamento {
         }
         
     }
+=======
+     Connection conect;
+    PreparedStatement pst;
+    ResultSet rs;
+    
+>>>>>>> d89f8b476c662499774dd9a31c57ed63579e221a
     
 }
