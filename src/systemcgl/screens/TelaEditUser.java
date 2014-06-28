@@ -60,11 +60,11 @@ public class TelaEditUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Senha Atual");
+        jLabel1.setText("Senha Atual:");
 
-        jLabel2.setText("Nova Senha");
+        jLabel2.setText("N:ova Senha:");
 
-        jLabel3.setText("Confirmação");
+        jLabel3.setText("Confirmação:");
 
         Confirmar.setText("Confirmar");
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +127,7 @@ public class TelaEditUser extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

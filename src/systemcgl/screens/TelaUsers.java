@@ -10,13 +10,12 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
+
+
+
 import javax.swing.JOptionPane;
-=======
->>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
-import javax.swing.JTable;
+
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 import systemcgl.Fachada;
 import systemcgl.entidades.Usuario;
@@ -31,6 +30,7 @@ public class TelaUsers extends javax.swing.JFrame {
     Fachada f = new Fachada() ;
     ResultSet rs;
     Usuario usr = new Usuario();
+    
     
     /**
      * Creates new form TelaUsers
@@ -179,6 +179,7 @@ public class TelaUsers extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -199,10 +200,16 @@ public class TelaUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-        this.setEnabled(false);
-        TelaEditUser ted = new TelaEditUser(usr,this);
-        ted.setVisible(true);
-        
+        try {
+            if (!usr.getId().equals("")) {
+                this.setEnabled(false);
+                TelaEditUser ted = new TelaEditUser(usr, this);
+                ted.setVisible(true);
+            }
+        } catch (NullPointerException e) {
+            System.err.println("nenhum usuário selecionado"); 
+        }
+
         
     }//GEN-LAST:event_EditarActionPerformed
 
@@ -211,28 +218,31 @@ public class TelaUsers extends javax.swing.JFrame {
         //usr.setNome(JTableUsuarios.getModel().getValueAt(seleciona, 0).toString());
         this.usr.setId(JTableUsuarios.getModel().getValueAt(seleciona, 1).toString());
         //usr.setTipo(JTableUsuarios.getModel().getValueAt(seleciona, 2).toString());
-        System.out.println(usr.getId());
+        
         System.out.println("selecionou o usuario"+ usr.getId());
     }//GEN-LAST:event_JTableUsuariosMouseClicked
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
-        try {
-            // Deletar o Usuario 
-<<<<<<< HEAD
-            int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do usuário?", "Excluir", JOptionPane.YES_NO_OPTION);  
-        if (resp == JOptionPane.YES_NO_OPTION) {  
-            f.rmUsr(usr); 
-           
+
+        if (usr.getId().equals("admin")) {
+            JOptionPane.showMessageDialog(this, "Você não pode excluir o Administrador!");
+        } else {
+            try {
+                // Deletar o Usuario 
+                int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do usuário?", "Excluir", JOptionPane.YES_NO_OPTION);
+                if (resp == JOptionPane.YES_NO_OPTION) {
+                    f.rmUsr(usr);
+                    JTableUsuarios.setModel(DbUtils.resultSetToTableModel(f.mostraTUsr()));
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             
         }  
             
-=======
-            f.rmUsr(usr);
->>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
+ 
     }//GEN-LAST:event_RemoverActionPerformed
 
     /**

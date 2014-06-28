@@ -6,10 +6,37 @@
 
 package systemcgl.repositorio;
 
+import java.sql.*;
+
 /**
  *
  * @author zare
  */
 public class RepositorioEquipamento {
+    Connection conect;
+    PreparedStatement pst;
+    ResultSet rs;
+    
+    public void svEquipDB (String nome, String marca, String modelo, String serial, double valor) throws ClassNotFoundException{
+        conect = ConectaBD.conect();
+        String sql = "insert into equipamento (nome, marca, modelo, serial, valor) values (?,?,?,?,?)";
+        
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setString(1, nome);
+            pst.setString(2, marca);
+            pst.setString(3, modelo);
+            pst.setString(4, serial);
+            pst.setDouble(5, valor);
+            
+            System.out.println("salvando equipamento no banco de dados");
+            
+            pst.execute();
+            
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        
+    }
     
 }

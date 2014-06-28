@@ -15,10 +15,11 @@ import systemcgl.entidades.Usuario;
 public class ControleSessao {
     Sessao s;
     
+    
     public boolean abrirSessao (Usuario usr) throws ClassNotFoundException{
         
         s = new Sessao(usr, true);
-        if (ControleSenha.comparaSenha(usr) == true) 
+        if (ControleSenha.comparaSenha(usr)) 
             return true;
         else 
             return false;
@@ -26,5 +27,11 @@ public class ControleSessao {
         
     }
     
-    
+   public void fecharSessao (){
+       Usuario usr = new Usuario();
+       
+       s = new Sessao(usr, false);
+       
+       
+   } 
 }
