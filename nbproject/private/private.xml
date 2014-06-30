@@ -3,35 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/systemcgl/screens/TelaUsers.java</file>
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/systemcgl/controle/ControleEquipamento.java</file>
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/systemcgl/entidades/Equipamento.java</file>
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/systemcgl/repositorio/RepositorioUsuario.java</file>
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/systemcgl/repositorio/RepositorioEquipamento.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/home/zaretux/NetBeansProjects/systemcgl/Main-master/src/systemcgl/screens/TelaUsers.java</file>
-=======
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/repositorio/RepositorioUsuario.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/controle/ControleSenha.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/MenuPrincipal.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/TelaCadUser.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/repositorio/ConectaBD.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/controle/ControleSessao.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/repositorio/RepositorioEquipamento.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/controle/ControleUsuario.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/TelaUsers.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/entidades/Sessao.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/TelaCadEquip.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/TelaLogin.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/entidades/Equipamento.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/Systemcgl.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/entidades/Usuario.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/Fachada.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/systemcgl/screens/TelaEditUser.java</file>
->>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
->>>>>>> d89f8b476c662499774dd9a31c57ed63579e221a
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCadEquip.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/entidades/EquipsLocacao.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleEquipamento.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaUsers.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipamento.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/entidades/Equipamento.java</file>
+            <file>file:/home/zaretux/NetBeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioUsuario.java</file>
         </group>
     </open-files>
 </project-private>
