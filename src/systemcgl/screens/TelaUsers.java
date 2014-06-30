@@ -10,17 +10,10 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
+
 import javax.swing.JOptionPane;
-=======
-<<<<<<< HEAD
-import javax.swing.JOptionPane;
-=======
->>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
->>>>>>> b773fddb6b0c615808a439450b955fc67f88406d
-import javax.swing.JTable;
+
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 import systemcgl.Fachada;
 import systemcgl.entidades.Usuario;
@@ -228,7 +221,7 @@ public class TelaUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_JTableUsuariosMouseClicked
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
-<<<<<<< HEAD
+
         if (usr.getId().equals("admin")) {
             JOptionPane.showMessageDialog(this, "Você não pode excluir o Administrador!");
         } else {
@@ -242,26 +235,10 @@ public class TelaUsers extends javax.swing.JFrame {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
             }
-=======
-        try {
-            // Deletar o Usuario 
-<<<<<<< HEAD
-            int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do usuário?", "Excluir", JOptionPane.YES_NO_OPTION);  
-        if (resp == JOptionPane.YES_NO_OPTION) {  
-            f.rmUsr(usr); 
-           
-            
-        }  
-            
-=======
-            f.rmUsr(usr);
->>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
->>>>>>> b773fddb6b0c615808a439450b955fc67f88406d
+
         }
     }//GEN-LAST:event_RemoverActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
