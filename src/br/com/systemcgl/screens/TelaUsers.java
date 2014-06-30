@@ -11,12 +11,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< HEAD
+import javax.swing.JOptionPane;
+
+=======
 
 
 import javax.swing.JOptionPane;
 
 import javax.swing.JTable;
+<<<<<<< HEAD:src/br/com/systemcgl/screens/TelaUsers.java
 
+=======
+>>>>>>> d89f8b476c662499774dd9a31c57ed63579e221a
+>>>>>>> 8ac6188ede0ec1c4b225ff8d3274bc5a3a73a630
+>>>>>>> b9aef69de9ac4c31eace8ee3acf39ec7d60c2311:src/systemcgl/screens/TelaUsers.java
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import br.com.systemcgl.Fachada;
@@ -226,6 +235,16 @@ public class TelaUsers extends javax.swing.JFrame {
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
 
+<<<<<<< HEAD:src/br/com/systemcgl/screens/TelaUsers.java
+=======
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> d89f8b476c662499774dd9a31c57ed63579e221a
+>>>>>>> 8ac6188ede0ec1c4b225ff8d3274bc5a3a73a630
+>>>>>>> b9aef69de9ac4c31eace8ee3acf39ec7d60c2311:src/systemcgl/screens/TelaUsers.java
         if (usr.getId().equals("admin")) {
             JOptionPane.showMessageDialog(this, "Você não pode excluir o Administrador!");
         } else {
@@ -241,14 +260,41 @@ public class TelaUsers extends javax.swing.JFrame {
             }
 
 
+=======
+<<<<<<< HEAD
+
             
         }  
             
 
  
+<<<<<<< HEAD:src/br/com/systemcgl/screens/TelaUsers.java
 
    
 
+=======
+=======
+=======
+        try {
+            // Deletar o Usuario 
+<<<<<<< HEAD
+            int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do usuário?", "Excluir", JOptionPane.YES_NO_OPTION);  
+        if (resp == JOptionPane.YES_NO_OPTION) {  
+            f.rmUsr(usr); 
+           
+            
+        }  
+            
+=======
+            f.rmUsr(usr);
+>>>>>>> b9cd0cb446fb2a4def27a56f02e04cb47316d20f
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaUsers.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> b773fddb6b0c615808a439450b955fc67f88406d
+>>>>>>> 8ac6188ede0ec1c4b225ff8d3274bc5a3a73a630
+        }
+>>>>>>> d89f8b476c662499774dd9a31c57ed63579e221a
+>>>>>>> b9aef69de9ac4c31eace8ee3acf39ec7d60c2311:src/systemcgl/screens/TelaUsers.java
     }//GEN-LAST:event_RemoverActionPerformed
     
     /**
