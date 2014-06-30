@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import br.com.systemcgl.Fachada;
 import br.com.systemcgl.entidades.Usuario;
