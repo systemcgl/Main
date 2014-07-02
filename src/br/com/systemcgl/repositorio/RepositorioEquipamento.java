@@ -18,7 +18,7 @@ public class RepositorioEquipamento {
     PreparedStatement pst;
     ResultSet rs;
     
-    public void svEquipDB(String nome, String marca, String modelo, String serial, double valor, boolean dispo) throws ClassNotFoundException {
+    public void svEquipDB(String nome, String marca, String modelo, String serial, double valor, String dispo) throws ClassNotFoundException {
         conect = ConectaBD.conect();
         String sql = "insert into equipamento (nome, marca, modelo, serial, valor, disponivel) values (?,?,?,?,?,?)";
         
@@ -29,7 +29,7 @@ public class RepositorioEquipamento {
             pst.setString(3, modelo);
             pst.setString(4, serial);
             pst.setDouble(5, valor);
-            pst.setBoolean(6, dispo);
+            pst.setString(6, dispo);
             
             System.out.println("salvando equipamento no banco de dados");
             
@@ -44,7 +44,11 @@ public class RepositorioEquipamento {
     public ResultSet getTEquip() throws ClassNotFoundException {
         conect = ConectaBD.conect();
         
-        String sql = "select * from equipamento";
+        String sql = "select codEquipamento as Código,"
+                + " nome as Descrição, marca as Marca,"
+                + " modelo as Modelo, serial as Serial,"
+                + " valor as Valor,"
+                + " disponivel as Disponibilidade from equipamento";
         
         try {
             pst = conect.prepareStatement(sql);
@@ -58,10 +62,12 @@ public class RepositorioEquipamento {
         }
         
     }
+    
+    
 
     public void delEquip(int id) throws ClassNotFoundException {
         conect = ConectaBD.conect();        
-        String sql = "delete from equipamento where id_equipamento=?";
+        String sql = "delete from equipamento where serial=?";
         try {
             pst = conect.prepareStatement(sql);
             pst.setInt(1, id);
@@ -72,14 +78,18 @@ public class RepositorioEquipamento {
         }
     }
     
-    public void alterEquip(int id, String atrib, String valor) throws ClassNotFoundException {
+    public void alterEquip(int cod, String nome, String marca, String modelo, String serial, double valor) throws ClassNotFoundException {
         conect = ConectaBD.conect();
-        String sql = "update equipamento set ?=? where id_equipamento=?";
+        String sql = "update equipamento set nome=? , marca=? , modelo=? , serial=? , valor=?  where codEquipamento=?";
         try {
             pst = conect.prepareStatement(sql);
-            pst.setString(1, atrib);
-            pst.setString(2, valor);
-            pst.setInt(3, id);
+            pst.setString(1, nome);
+            pst.setString(2, marca);
+            pst.setString(3, modelo);
+            pst.setString(4, serial);
+            pst.setDouble(5, valor);
+            pst.setInt(6, cod);
+            pst.execute();
         } catch (SQLException e) {
             System.err.println(e);
             
@@ -101,19 +111,5 @@ public class RepositorioEquipamento {
         }
         
     }
-    
-        public void alterEquip(int id, String atrib, boolean valor) throws ClassNotFoundException {
-        conect = ConectaBD.conect();
-        String sql = "update equipamento set ?=? where id_equipamento=?";
-        try {
-            pst = conect.prepareStatement(sql);
-            pst.setString(1, atrib);
-            pst.setBoolean(2, valor);
-            pst.setInt(3, id);
-        } catch (SQLException e) {
-            System.err.println(e);
-            
-        }
-        
-    }
+
 }

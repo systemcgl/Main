@@ -6,10 +6,8 @@
 
 package br.com.systemcgl;
 
-import br.com.systemcgl.entidades.Usuario;
-import br.com.systemcgl.controle.ControleUsuario;
-import br.com.systemcgl.controle.ControleSenha;
-import br.com.systemcgl.controle.ControleSessao;
+import br.com.systemcgl.entidades.*;
+import br.com.systemcgl.controle.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,6 +20,7 @@ public class Fachada {
     private ControleUsuario ctU = new ControleUsuario();
     private ControleSenha ctS = new ControleSenha();
     private ControleSessao ctSs = new ControleSessao();
+    private ControleEquipamento ctE = new ControleEquipamento();
 
  
     
@@ -71,12 +70,19 @@ public class Fachada {
         return ctU.rmUser(usr);
     }
     
-    public void cadEquip(){
-        
+    public void cadEquip(Equipamento eq) throws ClassNotFoundException{
+     ctE.addEquip(eq);
     }
     
-    public void rmEquip (){
-        
+    public  ResultSet mostraTEquip () throws ClassNotFoundException, SQLException{
+        return ctE.listaEquip();
+    }
+    public void rmEquip ( Equipamento eq) throws ClassNotFoundException{
+        ctE.delEquip(eq);
+    }
+    
+    public void editEquip  (Equipamento eq)throws ClassNotFoundException{
+        ctE.alterEquip(eq);
     }
     
     public void cadCli(){

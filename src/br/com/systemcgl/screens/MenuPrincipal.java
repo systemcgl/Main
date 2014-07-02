@@ -49,6 +49,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         EditUser = new javax.swing.JMenu();
         CadUser = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -134,6 +135,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         EditUser.add(jMenuItem4);
 
+        jMenuItem3.setText("Editar equipamentos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        EditUser.add(jMenuItem3);
+
         jMenuBar1.add(EditUser);
 
         jMenu4.setText("Ferramentas");
@@ -188,9 +197,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TelaUsers users = null;
         try {
             new TelaUsers(this).setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
        
@@ -212,6 +219,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
        cadEquip.setVisible(true);
        jDesktopPane.add(cadEquip);
     }//GEN-LAST:event_CadEquipActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        TelaEquipamentos buscEquip ;
+        try {
+            buscEquip = new TelaEquipamentos(jDesktopPane);
+            buscEquip.setVisible(true);
+            jDesktopPane.add(buscEquip);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +282,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

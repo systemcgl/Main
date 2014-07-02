@@ -9,22 +9,44 @@ package br.com.systemcgl.screens;
 import java.awt.Dimension;
 import br.com.systemcgl.Fachada;
 import br.com.systemcgl.entidades.Equipamento;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author zare
  */
-public class TelaCadEquip extends javax.swing.JInternalFrame {
+public class TelaEditEquip extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form TelaCadEquip
+     * Creates new form TelaEditEquip
      */
     private Fachada f = new Fachada();
-    public TelaCadEquip() {
+    private Equipamento eq = new Equipamento();
+    private JTable jt = new JTable();
+    
+    public TelaEditEquip() {
         initComponents();
+       
         
     }
- /*   public TelaCadEquip(Dimension t) {
+    
+    public TelaEditEquip(Equipamento eq, JTable jt){
+        this();
+        this.eq = eq;
+        this.jt = jt;
+        
+        CampoNome.setText(eq.getNome());
+        CampoMarca.setText(eq.getMarca());
+        CampoModelo.setText(eq.getModelo());
+        CampoSerial.setText(eq.getSerial());
+        CampoValor.setText(eq.getValorLoca().toString());
+        
+    }
+ /*   public TelaEditEquip(Dimension t) {
         
         this();
         this.setSize(t);
@@ -49,11 +71,18 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
         CampoValor = new javax.swing.JTextField();
         CampoModelo = new javax.swing.JTextField();
         CampoMarca = new javax.swing.JTextField();
-        Cadastrar = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("Cadastrar Equipamento");
+        setTitle("Editar Equipamento");
+        setLayer(1);
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        setVisible(true);
 
         jLabel1.setText("Marca:");
 
@@ -65,10 +94,10 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Valor da Locação:");
 
-        Cadastrar.setText("Cadastrar");
-        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+        Confirmar.setText("Confirmar");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarActionPerformed(evt);
+                ConfirmarActionPerformed(evt);
             }
         });
 
@@ -90,7 +119,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                         .addGap(263, 263, 263)
                         .addComponent(Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Cadastrar)
+                        .addComponent(Confirmar)
                         .addGap(206, 206, 206))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -140,10 +169,12 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                     .addComponent(CampoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cadastrar)
+                    .addComponent(Confirmar)
                     .addComponent(Cancelar))
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleName("Editar Equipamento");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,7 +184,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         String nome = CampoNome.getText();
         String marca = CampoMarca.getText();
         String modelo = CampoModelo.getText();
@@ -165,14 +196,17 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Você deixou algum campo em branco?");
             } else {
 
-                System.out.println("recebeu:" + nome + " " + " " + marca + " " + modelo + " " + serial + " " + valor);
-                Equipamento eq = new Equipamento(nome, marca, modelo, serial, valor);
+                System.out.println("recebeu: " + nome + " " + " " + marca + " " + modelo + " " + serial + " " + valor);
+                Equipamento eq2 = new Equipamento(nome, marca, modelo, serial, valor);
                 try {
-                    f.cadEquip(eq);
-                    JOptionPane.showMessageDialog(rootPane, "Equipamento cadastrado com sucesso!!");
+                    f.editEquip(eq2);
+                    JOptionPane.showMessageDialog(rootPane, "Dados alterados com sucesso!!");
+                    jt.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip()));
                     this.dispose();
                 } catch (ClassNotFoundException ee) {
                     System.err.println(ee);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaEditEquip.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } catch (NumberFormatException e) {
@@ -182,17 +216,17 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
 
 
         
-    }//GEN-LAST:event_CadastrarActionPerformed
+    }//GEN-LAST:event_ConfirmarActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cadastrar;
     private javax.swing.JTextField CampoMarca;
     private javax.swing.JTextField CampoModelo;
     private javax.swing.JTextField CampoNome;
     private javax.swing.JTextField CampoSerial;
     private javax.swing.JTextField CampoValor;
     private javax.swing.JButton Cancelar;
+    private javax.swing.JButton Confirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
