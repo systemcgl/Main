@@ -37,17 +37,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Loca = new javax.swing.JButton();
+        DevEquip = new javax.swing.JButton();
         CadEquip = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        CadCliente = new javax.swing.JButton();
+        Caixa = new javax.swing.JButton();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         EditUser = new javax.swing.JMenu();
-        CadUser = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -65,28 +65,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setText("Locar Equipamento");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMaximumSize(new java.awt.Dimension(44, 44));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Loca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Shopping-Cart-42x42.png"))); // NOI18N
+        Loca.setFocusable(false);
+        Loca.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Loca.setMaximumSize(new java.awt.Dimension(60, 60));
+        Loca.setMinimumSize(new java.awt.Dimension(52, 52));
+        Loca.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Loca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LocaActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(Loca);
 
-        jButton2.setText("Devolver Equipamento");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(44, 44));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        DevEquip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/computer-devolve-42x42.png"))); // NOI18N
+        DevEquip.setFocusable(false);
+        DevEquip.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DevEquip.setMaximumSize(new java.awt.Dimension(60, 60));
+        DevEquip.setMinimumSize(new java.awt.Dimension(50, 50));
+        DevEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(DevEquip);
 
-        CadEquip.setText("Cadastrar Equipamento");
+        CadEquip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/computer-add-42x42.png"))); // NOI18N
         CadEquip.setFocusable(false);
         CadEquip.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CadEquip.setMaximumSize(new java.awt.Dimension(60, 60));
+        CadEquip.setMinimumSize(new java.awt.Dimension(50, 50));
         CadEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CadEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,12 +99,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(CadEquip);
 
-        jButton3.setText("Caixa");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setMaximumSize(new java.awt.Dimension(44, 44));
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        CadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Client-42x42.png"))); // NOI18N
+        CadCliente.setFocusable(false);
+        CadCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CadCliente.setMaximumSize(new java.awt.Dimension(60, 60));
+        CadCliente.setMinimumSize(new java.awt.Dimension(52, 52));
+        CadCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadClienteActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(CadCliente);
+
+        Caixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/cash-register-42x42.png"))); // NOI18N
+        Caixa.setFocusable(false);
+        Caixa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Caixa.setMaximumSize(new java.awt.Dimension(60, 60));
+        Caixa.setMinimumSize(new java.awt.Dimension(52, 52));
+        Caixa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(Caixa);
+
+        jDesktopPane.setBackground(new java.awt.Color(113, 113, 113));
 
         jMenu1.setText("Arquivo");
 
@@ -119,14 +139,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         EditUser.setText("Editar");
 
-        CadUser.setText("Adicionar usuário");
-        CadUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadUserActionPerformed(evt);
-            }
-        });
-        EditUser.add(CadUser);
-
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
         jMenuItem4.setText("Editar usuários");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +148,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         EditUser.add(jMenuItem4);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
         jMenuItem3.setText("Editar equipamentos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +172,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
-            .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,24 +185,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void LocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_LocaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void CadUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadUserActionPerformed
-    //Cadastro de usuario
-    
-    //Desabilitando janela principal
-        this.setEnabled(false);
-        
-        TelaCadUser cadUser = new TelaCadUser(this);
-        cadUser.setVisible(true);
-          
-    }//GEN-LAST:event_CadUserActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // Abre tela para editar usuários
@@ -233,6 +236,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void CadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadClienteActionPerformed
+        // TODO add your handling code here:
+        TelaCadCli tcc = new TelaCadCli();
+        tcc.setVisible(true);
+        jDesktopPane.add(tcc);
+    }//GEN-LAST:event_CadClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,12 +279,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CadCliente;
     private javax.swing.JButton CadEquip;
-    private javax.swing.JMenuItem CadUser;
+    private javax.swing.JButton Caixa;
+    private javax.swing.JButton DevEquip;
     private javax.swing.JMenu EditUser;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Loca;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

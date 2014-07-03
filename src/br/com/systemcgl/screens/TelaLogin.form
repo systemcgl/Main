@@ -44,7 +44,7 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
                       <Component id="Cancelar" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Entrar" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
                   <Component id="Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Entrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,6 +95,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="Cancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/com/systemcgl/icones/Cancel-20x20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
@@ -103,6 +106,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="Entrar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/com/systemcgl/icones/Ok-20x20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Entrar"/>
       </Properties>
       <Events>

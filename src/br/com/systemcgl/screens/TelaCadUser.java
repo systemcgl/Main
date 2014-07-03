@@ -17,13 +17,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadUser extends javax.swing.JFrame {
 
-    private MenuPrincipal telaAnterior;
+    private TelaUsers telaAnterior;
     
     private TelaCadUser() {
         initComponents();
     }
     
-    public TelaCadUser (MenuPrincipal telaAnterior) {
+
+        public TelaCadUser (TelaUsers telaAnterior) {
         //chamar o contrutor padrão
         this();
         
@@ -32,7 +33,6 @@ public class TelaCadUser extends javax.swing.JFrame {
         this.telaAnterior = telaAnterior;
         
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +62,7 @@ public class TelaCadUser extends javax.swing.JFrame {
             }
         });
 
+        BotaoCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Ok-20x20.png"))); // NOI18N
         BotaoCriar.setText("Criar");
         BotaoCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +80,7 @@ public class TelaCadUser extends javax.swing.JFrame {
             }
         });
 
+        BotaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         BotaoCancelar.setText("Cancelar");
         BotaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +123,7 @@ public class TelaCadUser extends javax.swing.JFrame {
                         .addComponent(BotaoCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BotaoCriar)
-                        .addGap(0, 136, Short.MAX_VALUE))
+                        .addGap(0, 88, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +145,7 @@ public class TelaCadUser extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))

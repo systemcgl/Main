@@ -94,6 +94,7 @@ public class TelaEditEquip extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Valor da Locação:");
 
+        Confirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Ok-20x20.png"))); // NOI18N
         Confirmar.setText("Confirmar");
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +102,7 @@ public class TelaEditEquip extends javax.swing.JInternalFrame {
             }
         });
 
+        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,14 +169,12 @@ public class TelaEditEquip extends javax.swing.JInternalFrame {
                     .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(CampoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirmar)
                     .addComponent(Cancelar))
                 .addContainerGap())
         );
-
-        getAccessibleContext().setAccessibleName("Editar Equipamento");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

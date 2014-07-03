@@ -54,6 +54,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Senha:");
 
+        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +62,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        Entrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Ok-20x20.png"))); // NOI18N
         Entrar.setText("Entrar");
         Entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +86,7 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(CampoID)
                             .addComponent(CampoSenha)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(104, Short.MAX_VALUE)
+                        .addContainerGap(56, Short.MAX_VALUE)
                         .addComponent(Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Entrar)
@@ -109,7 +111,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
                     .addComponent(Entrar))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();

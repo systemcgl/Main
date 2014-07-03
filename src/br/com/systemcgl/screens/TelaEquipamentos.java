@@ -62,8 +62,12 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         Editar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
+        setMaximizable(true);
+        setTitle("Equipamentos");
+        setAutoscrolls(true);
 
         JTableEquip.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,8 +95,9 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(JTableEquip);
 
-        jLabel1.setText("Pesquisar:");
+        jLabel1.setText("Pesquisa:");
 
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
         Editar.setText("Editar");
         Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,12 +105,16 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
             }
         });
 
+        Remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Delete-Alt-20x20.png"))); // NOI18N
         Remover.setText("Remover");
         Remover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemoverActionPerformed(evt);
             }
         });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/search20x20.png"))); // NOI18N
+        jButton1.setText("Buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,34 +123,36 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1)
-                        .addGap(30, 30, 30))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Editar)
                         .addGap(18, 18, 18)
-                        .addComponent(Remover)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(Remover)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Editar)
                     .addComponent(Remover))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleDescription("Equipamentos");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,6 +208,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
     private javax.swing.JButton Editar;
     private javax.swing.JTable JTableEquip;
     private javax.swing.JButton Remover;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

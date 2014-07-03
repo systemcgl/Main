@@ -74,6 +74,7 @@ public class TelaUsers extends javax.swing.JFrame {
         Fechar = new javax.swing.JButton();
         Editar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
+        Adicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableUsuarios = new javax.swing.JTable();
 
@@ -97,6 +98,7 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
         Editar.setText("Editar");
         Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,10 +106,19 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
+        Remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         Remover.setText("Remover");
         Remover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemoverActionPerformed(evt);
+            }
+        });
+
+        Adicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
+        Adicionar.setText("Adicionar");
+        Adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarActionPerformed(evt);
             }
         });
 
@@ -117,9 +128,11 @@ public class TelaUsers extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Editar)
-                .addGap(98, 98, 98)
+                .addGap(18, 18, 18)
                 .addComponent(Remover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(Adicionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Fechar))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,7 +142,8 @@ public class TelaUsers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Editar)
                     .addComponent(Fechar)
-                    .addComponent(Remover))
+                    .addComponent(Remover)
+                    .addComponent(Adicionar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,7 +175,7 @@ public class TelaUsers extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -236,6 +250,15 @@ public class TelaUsers extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_RemoverActionPerformed
+
+    private void AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarActionPerformed
+        // TODO add your handling code here:
+        this.setEnabled(false);
+        
+        TelaCadUser cadUser = new TelaCadUser(this);
+        cadUser.setVisible(true);
+        
+    }//GEN-LAST:event_AdicionarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -277,6 +300,7 @@ public class TelaUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Adicionar;
     private javax.swing.JButton Editar;
     private javax.swing.JButton Fechar;
     private javax.swing.JTable JTableUsuarios;
