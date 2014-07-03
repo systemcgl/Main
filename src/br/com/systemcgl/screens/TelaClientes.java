@@ -5,20 +5,32 @@
  */
 
 package br.com.systemcgl.screens;
-
+import net.proteanit.sql.DbUtils;
+import br.com.systemcgl.Fachada;
+import javax.swing.JDesktopPane;
 /**
  *
  * @author zare
  */
 public class TelaClientes extends javax.swing.JInternalFrame {
 
+    Fachada f = new Fachada();
+    JDesktopPane jd = new JDesktopPane();
+    
     /**
      * Creates new form TelaClientes
+     * @throws java.lang.ClassNotFoundException
      */
-    public TelaClientes() {
+    public TelaClientes() throws ClassNotFoundException {
         initComponents();
+        jTableClientes.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
     }
 
+    public TelaClientes (JDesktopPane jd) throws ClassNotFoundException{
+        this();
+        
+        this.jd = jd;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,12 +41,13 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableClientes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Clientes");
@@ -44,7 +57,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             e1.printStackTrace();
         }
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,7 +68,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableClientes);
 
         jLabel1.setText("Pesquisa:");
 
@@ -67,6 +80,14 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Delete-Alt-20x20.png"))); // NOI18N
         jButton3.setText("Remover");
+
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
+        Cadastrar.setText("Cadastrar");
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +108,9 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)))
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(Cadastrar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -98,7 +121,8 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(Cadastrar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,14 +136,22 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        // TODO add your handling code here:
+        TelaCadCli tcc = new TelaCadCli();
+        tcc.setVisible(true);
+        jd.add(tcc);
+    }//GEN-LAST:event_CadastrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cadastrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableClientes;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

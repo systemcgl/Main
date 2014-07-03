@@ -40,7 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Loca = new javax.swing.JButton();
         DevEquip = new javax.swing.JButton();
         CadEquip = new javax.swing.JButton();
-        CadCliente = new javax.swing.JButton();
+        Clientes = new javax.swing.JButton();
         Caixa = new javax.swing.JButton();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -99,18 +99,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(CadEquip);
 
-        CadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Client-42x42.png"))); // NOI18N
-        CadCliente.setFocusable(false);
-        CadCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        CadCliente.setMaximumSize(new java.awt.Dimension(60, 60));
-        CadCliente.setMinimumSize(new java.awt.Dimension(52, 52));
-        CadCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CadCliente.addActionListener(new java.awt.event.ActionListener() {
+        Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Client-Male-Dark-42x42.png"))); // NOI18N
+        Clientes.setFocusable(false);
+        Clientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Clientes.setMaximumSize(new java.awt.Dimension(60, 60));
+        Clientes.setMinimumSize(new java.awt.Dimension(52, 52));
+        Clientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadClienteActionPerformed(evt);
+                ClientesActionPerformed(evt);
             }
         });
-        jToolBar1.add(CadCliente);
+        jToolBar1.add(Clientes);
 
         Caixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/cash-register-42x42.png"))); // NOI18N
         Caixa.setFocusable(false);
@@ -140,7 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         EditUser.setText("Editar");
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        jMenuItem4.setText("Editar usuários");
+        jMenuItem4.setText("Usuários");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -149,7 +149,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         EditUser.add(jMenuItem4);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        jMenuItem3.setText("Editar equipamentos");
+        jMenuItem3.setText("Equipamentos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -236,12 +236,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void CadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadClienteActionPerformed
+    private void ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesActionPerformed
         // TODO add your handling code here:
-        TelaCadCli tcc = new TelaCadCli();
-        tcc.setVisible(true);
-        jDesktopPane.add(tcc);
-    }//GEN-LAST:event_CadClienteActionPerformed
+        TelaClientes tc;
+        try {
+            tc = new TelaClientes(jDesktopPane);
+            tc.setVisible(true);
+            jDesktopPane.add(tc);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_ClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,9 +285,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadCliente;
     private javax.swing.JButton CadEquip;
     private javax.swing.JButton Caixa;
+    private javax.swing.JButton Clientes;
     private javax.swing.JButton DevEquip;
     private javax.swing.JMenu EditUser;
     private javax.swing.JButton Loca;

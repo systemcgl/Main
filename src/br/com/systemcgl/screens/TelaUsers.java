@@ -99,7 +99,7 @@ public class TelaUsers extends javax.swing.JFrame {
         });
 
         Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        Editar.setText("Editar");
+        Editar.setText("Alterar Senha");
         Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditarActionPerformed(evt);

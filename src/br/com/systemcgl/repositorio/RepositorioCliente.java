@@ -6,6 +6,7 @@
 
 package br.com.systemcgl.repositorio;
 
+import br.com.systemcgl.entidades.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,18 +22,20 @@ public class RepositorioCliente {
     PreparedStatement pst;
     ResultSet rs;
     
-    public void svCliente (String nome, String rg, String cpf, String endereco, String cidade, String telefone) throws ClassNotFoundException{
+    public void svCliente (Cliente cli) throws ClassNotFoundException{
         conect = ConectaBD.conect();
-        String sql = " insert into cliente (nome, rg, cpf, endereco, cidade, telefone) values(?,?,?,?,?,?)" ;
+        String sql = "insert into cliente (nome, rg, cpf, endereco, cidade, estado, telefone, pendencias) values(?,?,?,?,?,?,?,?)" ;
         
         try {
             pst = conect.prepareStatement(sql);
-            pst.setString(1, nome);
-            pst.setString(2, rg);
-            pst.setString(3, cpf);
-            pst.setString(4, endereco);
-            pst.setString(5, cidade);
-            pst.setString(6, telefone);
+            pst.setString(1, cli.getNome());
+            pst.setString(2, cli.getRg());
+            pst.setString(3, cli.getCpf());
+            pst.setString(4, cli.getEndereco());
+            pst.setString(5, cli.getCidade());
+            pst.setString(6, cli.getEstado());
+            pst.setString(7, cli.getTelefone());
+            pst.setString(8, cli.getPendencias());
             pst.execute();
             
         } catch (SQLException e) {
@@ -45,12 +48,12 @@ public class RepositorioCliente {
     
     public ResultSet mostraClientes() throws ClassNotFoundException {
        conect = ConectaBD.conect();
-       String sql = "select * from cliente";
+       String sql = "select codCliente as Código, nome as Nome, pendencias as Pendências from cliente";
        
         try {
             pst = conect.prepareStatement(sql);
             rs = pst.executeQuery();
-            System.out.println("requisitando dados de usuarios");
+            System.out.println("requisitando dados de clientes...");
             return rs;
         } catch (SQLException e) {
             System.err.println(e);

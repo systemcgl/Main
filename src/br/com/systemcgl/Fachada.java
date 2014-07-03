@@ -16,12 +16,12 @@ import java.sql.SQLException;
  * @author zare
  */
 public class Fachada {
-    private Usuario usr = new Usuario();
+    
     private ControleUsuario ctU = new ControleUsuario();
     private ControleSenha ctS = new ControleSenha();
     private ControleSessao ctSs = new ControleSessao();
     private ControleEquipamento ctE = new ControleEquipamento();
-
+    private ControleCliente ctC = new ControleCliente();
  
     
     public boolean cadUser (String nome, String id, String senha) throws ClassNotFoundException{
@@ -85,10 +85,16 @@ public class Fachada {
         ctE.alterEquip(eq);
     }
     
-    public void cadCli(){
+    public void cadCli(String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone) throws ClassNotFoundException{
+        
+        Cliente cli = new Cliente(nome, rg, cpf, endereco, cidade, estado, telefone);
+        ctC.cadCliente(cli);
         
     }
     
+    public ResultSet tabClientes() throws ClassNotFoundException{
+        return ctC.dadosTabCli();
+    }
     public void editCli(){
         
     }

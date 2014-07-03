@@ -34,7 +34,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/br/com/systemcgl/icones/Edit-20x20.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar usu&#xe1;rios"/>
+                <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
@@ -45,7 +45,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/br/com/systemcgl/icones/Edit-20x20.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar equipamentos"/>
+                <Property name="text" type="java.lang.String" value="Equipamentos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -173,10 +173,10 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadEquipActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="CadCliente">
+        <Component class="javax.swing.JButton" name="Clientes">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/systemcgl/icones/Add-Client-42x42.png"/>
+              <Image iconType="3" name="/br/com/systemcgl/icones/Client-Male-Dark-42x42.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -189,7 +189,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClientesActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Caixa">
