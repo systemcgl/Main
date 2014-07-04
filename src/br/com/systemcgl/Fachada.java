@@ -99,8 +99,8 @@ public class Fachada {
         
     }
     
-    public void rmCli() {
-        
+    public void rmCli(int cod) throws ClassNotFoundException {
+        ctC.remCli(cod);
     }
     
     public void locEquip() {

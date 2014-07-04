@@ -11,19 +11,27 @@ import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author zare
  */
 public class TelaCadCli extends javax.swing.JInternalFrame {
-
+    JTable jt = new JTable();
     Fachada f = new Fachada();
     /**
      * Creates new form TelaCadCli
      */
     public TelaCadCli() {
         initComponents();
+    }
+    
+    public TelaCadCli( JTable jt) {
+        this();
+        
+        this.jt = jt;
     }
 
     /**
@@ -226,6 +234,7 @@ public class TelaCadCli extends javax.swing.JInternalFrame {
                     f.cadCli(nome, rg, cpf, endereco, cidade, estado, tel);
                     JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
                     this.dispose();
+                    jt.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
                 } catch (HeadlessException e) {
                     System.err.println(e);
                 } catch (ClassNotFoundException ex) {

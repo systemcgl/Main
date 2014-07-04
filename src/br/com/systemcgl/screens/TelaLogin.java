@@ -19,6 +19,7 @@ import br.com.systemcgl.entidades.Usuario;
 public class TelaLogin extends javax.swing.JFrame {
     Usuario usr = new Usuario();
     Fachada f = new Fachada();
+    String id;
     /**
      * Creates new form InterfaceLogin
      */
@@ -130,13 +131,13 @@ public class TelaLogin extends javax.swing.JFrame {
       String pass = new String(cp);
         usr.setId(id);
         usr.setSenha(pass);
-        
+        this.id = CampoID.getText();
         try {
             if (id.equals("") || pass.equals("")) {
                 JOptionPane.showMessageDialog(this, "Você deixou algo em branco?");
             } else {
                 if (f.login(usr)) {
-                    MenuPrincipal inicial = new MenuPrincipal();
+                    MenuPrincipal inicial = new MenuPrincipal(id);
                     inicial.setVisible(true);
                     this.dispose();
                 }else 

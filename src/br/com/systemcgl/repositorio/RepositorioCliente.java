@@ -80,12 +80,12 @@ public class RepositorioCliente {
         
     }
     
-    public void delCliente (int id) throws ClassNotFoundException{
+    public void delCliente (int cod) throws ClassNotFoundException{
            conect = ConectaBD.conect();
-           String sql = "delete from cliente where id=?";
+           String sql = "delete from cliente where codCliente=?";
            try {
             pst = conect.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setInt(1, cod);
             pst.execute();
             System.out.println("Cliente excluido");
             

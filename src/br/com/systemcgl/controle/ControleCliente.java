@@ -26,4 +26,10 @@ public class ControleCliente {
     public ResultSet dadosTabCli() throws ClassNotFoundException{
         return rc.mostraClientes();
     }
+    
+    public void remCli (int cod) throws ClassNotFoundException{
+        
+        rc.delCliente(cod);
+        
+    }
 }

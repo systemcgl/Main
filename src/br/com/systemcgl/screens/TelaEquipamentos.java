@@ -174,12 +174,11 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
 
     private void JTableEquipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEquipMouseClicked
         // TODO add your handling code here:
-        String idtemp ;
-        int id;
+        String codTemp ;
         int seleciona = JTableEquip.getSelectedRow();
-        idtemp = (JTableEquip.getModel().getValueAt(seleciona, 0).toString());
+        codTemp = (JTableEquip.getModel().getValueAt(seleciona, 0).toString());
         String vltemp; 
-        eq.setCod(Integer.parseInt(idtemp));
+        eq.setCod(Integer.parseInt(codTemp));
         eq.setNome(JTableEquip.getModel().getValueAt(seleciona, 1).toString());
         eq.setMarca(JTableEquip.getModel().getValueAt(seleciona, 2).toString());
         eq.setModelo(JTableEquip.getModel().getValueAt(seleciona, 3).toString());

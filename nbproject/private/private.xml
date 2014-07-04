@@ -7,6 +7,7 @@
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLogin.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLoca.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/Cliente.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaEditUser.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/MenuPrincipal.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleUsuario.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleEquipamento.java</file>
@@ -16,6 +17,7 @@
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipamento.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaEditEquip.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/Fachada.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/ConectaBD.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCadCli.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleCliente.java</file>
         </group>

@@ -26,7 +26,7 @@ public class TelaUsers extends javax.swing.JFrame {
     Fachada f = new Fachada() ;
     ResultSet rs;
     Usuario usr = new Usuario();
-    
+    String idSessao;
     
     /**
      * Creates new form TelaUsers
@@ -43,12 +43,12 @@ public class TelaUsers extends javax.swing.JFrame {
     }
     
 
-    public TelaUsers (MenuPrincipal telaAnterior) throws ClassNotFoundException, SQLException{
+    public TelaUsers (MenuPrincipal telaAnterior, String id) throws ClassNotFoundException, SQLException{
         
         this();
         
         this.telaAnterior = telaAnterior;
-                
+        this.idSessao = id;        
     }
     
  
@@ -72,7 +72,7 @@ public class TelaUsers extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Fechar = new javax.swing.JButton();
-        Editar = new javax.swing.JButton();
+        Alterar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
         Adicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -98,11 +98,11 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
-        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        Editar.setText("Alterar Senha");
-        Editar.addActionListener(new java.awt.event.ActionListener() {
+        Alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
+        Alterar.setText("Alterar Senha");
+        Alterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarActionPerformed(evt);
+                AlterarActionPerformed(evt);
             }
         });
 
@@ -127,7 +127,7 @@ public class TelaUsers extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Editar)
+                .addComponent(Alterar)
                 .addGap(18, 18, 18)
                 .addComponent(Remover)
                 .addGap(18, 18, 18)
@@ -140,7 +140,7 @@ public class TelaUsers extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Editar)
+                    .addComponent(Alterar)
                     .addComponent(Fechar)
                     .addComponent(Remover)
                     .addComponent(Adicionar))
@@ -209,19 +209,23 @@ public class TelaUsers extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowActivated
 
-    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+    private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
         try {
             if (!usr.getId().equals("")) {
-                this.setEnabled(false);
-                TelaEditUser ted = new TelaEditUser(usr, this);
-                ted.setVisible(true);
+                if (!idSessao.equals("admin")) {
+                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
+                } else {
+                    this.setEnabled(false);
+                    TelaEditUser ted = new TelaEditUser(usr, this);
+                    ted.setVisible(true);
+                }
             }
         } catch (NullPointerException e) {
             System.err.println("nenhum usuário selecionado"); 
         }
 
         
-    }//GEN-LAST:event_EditarActionPerformed
+    }//GEN-LAST:event_AlterarActionPerformed
 
     private void JTableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableUsuariosMouseClicked
         int seleciona = JTableUsuarios.getSelectedRow();
@@ -301,7 +305,7 @@ public class TelaUsers extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Adicionar;
-    private javax.swing.JButton Editar;
+    private javax.swing.JButton Alterar;
     private javax.swing.JButton Fechar;
     private javax.swing.JTable JTableUsuarios;
     private javax.swing.JButton Remover;

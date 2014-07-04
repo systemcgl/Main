@@ -18,7 +18,7 @@ import net.proteanit.sql.DbUtils;
  * @author zare
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    String idSessao;
     /**
      * Creates new form MenuPrincipal
      */
@@ -27,6 +27,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
+    public MenuPrincipal(String id) {
+        this();
+        this.idSessao = id;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         EditUser = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        Usuarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -139,14 +143,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         EditUser.setText("Editar");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        jMenuItem4.setText("Usuários");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        Usuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
+        Usuarios.setText("Usuários");
+        Usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                UsuariosActionPerformed(evt);
             }
         });
-        EditUser.add(jMenuItem4);
+        EditUser.add(Usuarios);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
         jMenuItem3.setText("Equipamentos");
@@ -171,7 +175,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1067, Short.MAX_VALUE)
             .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
@@ -193,19 +197,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuariosActionPerformed
         // Abre tela para editar usuários
         this.setEnabled(false);
        
         TelaUsers users = null;
         try {
-            new TelaUsers(this).setVisible(true);
-        } catch (ClassNotFoundException | SQLException ex) {
+            new TelaUsers(this, idSessao).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
        
         
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_UsuariosActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -291,6 +297,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton DevEquip;
     private javax.swing.JMenu EditUser;
     private javax.swing.JButton Loca;
+    private javax.swing.JMenuItem Usuarios;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -299,7 +306,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
