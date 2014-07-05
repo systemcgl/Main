@@ -63,9 +63,9 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         Editar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
-        setMaximizable(true);
         setTitle("Equipamentos");
         setAutoscrolls(true);
 
@@ -116,6 +116,14 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/search20x20.png"))); // NOI18N
         jButton1.setText("Buscar");
 
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
+        Cadastrar.setText("Cadastrar");
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,29 +135,34 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Editar)
                         .addGap(18, 18, 18)
-                        .addComponent(Remover)))
+                        .addComponent(Remover)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cadastrar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Editar)
-                    .addComponent(Remover))
+                    .addComponent(Remover)
+                    .addComponent(Cadastrar))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         getAccessibleContext().setAccessibleDescription("Equipamentos");
@@ -160,8 +173,8 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
         // TODO add your handling code here:
         int resp = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão do Equipamento?", "Excluir", JOptionPane.YES_NO_OPTION);
-                if (resp == JOptionPane.YES_NO_OPTION) {
-                    
+        if (resp == JOptionPane.YES_NO_OPTION) {
+
             try {
                 f.rmEquip(eq);
                 JOptionPane.showMessageDialog(rootPane, "Euipamento excluido com Sucesso!!");
@@ -169,7 +182,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(TelaEquipamentos.class.getName()).log(Level.SEVERE, null, ex);
             }
-                }
+        }
     }//GEN-LAST:event_RemoverActionPerformed
 
     private void JTableEquipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEquipMouseClicked
@@ -186,7 +199,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         vltemp = (JTableEquip.getModel().getValueAt(seleciona, 5).toString());
         eq.setValorLoca(Double.parseDouble(vltemp));
         eq.setDisponivel(JTableEquip.getModel().getValueAt(seleciona, 6).toString());
-        System.out.println("selecionou o "+eq.getNome());
+        System.out.println("selecionou o "+eq.getCod());
     }//GEN-LAST:event_JTableEquipMouseClicked
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
@@ -194,16 +207,26 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         TelaEditEquip tee;
         try {
             tee = new TelaEditEquip(eq, JTableEquip);
-        tee.setVisible(true);
-        jd.add(tee);
+            tee.setVisible(true);
+            tee.setLocation(jd.getWidth()/2 - tee.getWidth()/2, jd.getHeight()/2 - tee.getHeight()/2);
+            jd.add(tee);
         } catch (NullPointerException e) {
             System.err.println(e);
         }
 
     }//GEN-LAST:event_EditarActionPerformed
 
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        // TODO add your handling code here:
+        TelaCadEquip cadEquip = new TelaCadEquip();
+        cadEquip.setVisible(true);
+        cadEquip.setLocation(jd.getWidth()/2 - cadEquip.getWidth()/2, jd.getHeight()/2 - cadEquip.getHeight()/2) ;
+        jd.add(cadEquip);
+    }//GEN-LAST:event_CadastrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Editar;
     private javax.swing.JTable JTableEquip;
     private javax.swing.JButton Remover;

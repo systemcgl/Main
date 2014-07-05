@@ -26,7 +26,7 @@ public class TelaUsers extends javax.swing.JFrame {
     Fachada f = new Fachada() ;
     ResultSet rs;
     Usuario usr = new Usuario();
-    String idSessao;
+    boolean isAdm;
     
     /**
      * Creates new form TelaUsers
@@ -43,12 +43,12 @@ public class TelaUsers extends javax.swing.JFrame {
     }
     
 
-    public TelaUsers (MenuPrincipal telaAnterior, String id) throws ClassNotFoundException, SQLException{
+    public TelaUsers (MenuPrincipal telaAnterior, boolean isAdm) throws ClassNotFoundException, SQLException{
         
         this();
         
         this.telaAnterior = telaAnterior;
-        this.idSessao = id;        
+        this.isAdm = isAdm;        
     }
     
  
@@ -70,13 +70,12 @@ public class TelaUsers extends javax.swing.JFrame {
     private void initComponents() {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jPanel1 = new javax.swing.JPanel();
-        Fechar = new javax.swing.JButton();
-        Alterar = new javax.swing.JButton();
-        Remover = new javax.swing.JButton();
         Adicionar = new javax.swing.JButton();
+        Remover = new javax.swing.JButton();
+        Alterar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableUsuarios = new javax.swing.JTable();
+        Fechar = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -91,18 +90,11 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
-        Fechar.setText("Fechar");
-        Fechar.addActionListener(new java.awt.event.ActionListener() {
+        Adicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
+        Adicionar.setText("Adicionar");
+        Adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FecharActionPerformed(evt);
-            }
-        });
-
-        Alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        Alterar.setText("Alterar Senha");
-        Alterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarActionPerformed(evt);
+                AdicionarActionPerformed(evt);
             }
         });
 
@@ -114,38 +106,13 @@ public class TelaUsers extends javax.swing.JFrame {
             }
         });
 
-        Adicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
-        Adicionar.setText("Adicionar");
-        Adicionar.addActionListener(new java.awt.event.ActionListener() {
+        Alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
+        Alterar.setText("Alterar Senha");
+        Alterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AdicionarActionPerformed(evt);
+                AlterarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Alterar)
-                .addGap(18, 18, 18)
-                .addComponent(Remover)
-                .addGap(18, 18, 18)
-                .addComponent(Adicionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Fechar))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Alterar)
-                    .addComponent(Fechar)
-                    .addComponent(Remover)
-                    .addComponent(Adicionar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         JTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,6 +132,13 @@ public class TelaUsers extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JTableUsuarios);
 
+        Fechar.setText("Fechar");
+        Fechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,19 +146,33 @@ public class TelaUsers extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(Alterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(Remover)
+                        .addGap(18, 18, 18)
+                        .addComponent(Adicionar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Fechar)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Alterar)
+                    .addComponent(Remover)
+                    .addComponent(Adicionar))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(Fechar)
                 .addContainerGap())
         );
 
@@ -212,12 +200,12 @@ public class TelaUsers extends javax.swing.JFrame {
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
         try {
             if (!usr.getId().equals("")) {
-                if (!idSessao.equals("admin")) {
-                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
-                } else {
+                if (isAdm == true) {
                     this.setEnabled(false);
                     TelaEditUser ted = new TelaEditUser(usr, this);
                     ted.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
                 }
             }
         } catch (NullPointerException e) {
@@ -309,7 +297,6 @@ public class TelaUsers extends javax.swing.JFrame {
     private javax.swing.JButton Fechar;
     private javax.swing.JTable JTableUsuarios;
     private javax.swing.JButton Remover;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

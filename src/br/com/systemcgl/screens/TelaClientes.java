@@ -7,6 +7,8 @@
 package br.com.systemcgl.screens;
 import net.proteanit.sql.DbUtils;
 import br.com.systemcgl.Fachada;
+import java.beans.PropertyVetoException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
@@ -26,6 +28,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
      */
     public TelaClientes() throws ClassNotFoundException {
         initComponents();
+        
         jTableClientes.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
     }
 
@@ -48,11 +51,12 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
         Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
+        setMaximizable(true);
         setTitle("Clientes");
         try {
             setSelected(true);
@@ -83,8 +87,13 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/search20x20.png"))); // NOI18N
         jButton1.setText("Buscar");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        jButton2.setText("Editar");
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
 
         Remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Delete-Alt-20x20.png"))); // NOI18N
         Remover.setText("Remover");
@@ -111,31 +120,29 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Remover)
-                                .addGap(18, 18, 18)
-                                .addComponent(Cadastrar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Editar)
+                        .addGap(18, 18, 18)
+                        .addComponent(Remover)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cadastrar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(Editar)
                     .addComponent(Remover)
                     .addComponent(Cadastrar))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +151,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Remover, jButton2});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Editar, Remover});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,6 +160,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         TelaCadCli tcc = new TelaCadCli(jTableClientes);
         tcc.setVisible(true);
+        tcc.setLocation(jd.getWidth()/2 - tcc.getWidth()/2, jd.getHeight()/2 - tcc.getHeight()/2);
         jd.add(tcc);
     }//GEN-LAST:event_CadastrarActionPerformed
 
@@ -182,12 +190,26 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_RemoverActionPerformed
 
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        try {
+            // TODO add your handling code here:
+            System.err.println(cod);
+            TelaEditCli tec = new TelaEditCli(cod, jTableClientes);
+            tec.setVisible(true);
+            tec.setLocation(jd.getWidth()/2 - tec.getWidth()/2, jd.getHeight()/2 - tec.getHeight()/2);
+            jd.add(tec);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_EditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
+    private javax.swing.JButton Editar;
     private javax.swing.JButton Remover;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableClientes;

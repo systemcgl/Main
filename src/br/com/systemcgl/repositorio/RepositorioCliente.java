@@ -63,15 +63,37 @@ public class RepositorioCliente {
         
     }
     
-    public void alterCliente(int id, String atrib, String valor ) throws ClassNotFoundException{
+    public Cliente getCliente(int cod) throws SQLException, ClassNotFoundException {
+        conect = ConectaBD.conect();
+        String sql = "select * from cliente where codCliente=?";
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setInt(1, cod);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        Cliente cli = null; 
+        while (rs.next()){
+        cli = new Cliente(cod, rs.getString("nome"), rs.getString("rg"), rs.getString("cpf"), rs.getString("endereco"), rs.getString("cidade"), rs.getString("estado"), rs.getString("telefone"));
+        }
+        return cli;
+    }
+    
+    public void alterCliente(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone) throws ClassNotFoundException{
        conect = ConectaBD.conect();
-       String sql = "update cliente set ?=? where id_cliente=?";
+       String sql = "update cliente set nome=?, rg=?, cpf=?, endereco=?, cidade=?, estado=?, telefone=? where codCliente=?";
        
         try {
             pst = conect.prepareStatement(sql);
-            pst.setString(1,atrib );
-            pst.setString(2, valor);
-            pst.setInt(3, id);
+            pst.setString(1, nome);
+            pst.setString(2, rg);
+            pst.setString(3, cpf);
+            pst.setString(4, endereco);
+            pst.setString(5, cidade);
+            pst.setString(6, estado);
+            pst.setString(7, telefone);
+            pst.setInt(8, cod);
             System.out.println("Dados do cliente alterados");
         } catch (SQLException e) {
             System.err.println(e);

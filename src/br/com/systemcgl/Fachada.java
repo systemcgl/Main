@@ -56,8 +56,8 @@ public class Fachada {
         
     }
     
-    public boolean login(Usuario usr) throws ClassNotFoundException{
-        return ctSs.abrirSessao(usr);
+    public Sessao login(Usuario usr) throws ClassNotFoundException{
+        return ctSs.sessaoId(usr);
         
     }
     
@@ -95,8 +95,16 @@ public class Fachada {
     public ResultSet tabClientes() throws ClassNotFoundException{
         return ctC.dadosTabCli();
     }
-    public void editCli(){
+    
+    public Cliente tDadosCliente(int cod) throws SQLException, ClassNotFoundException{
         
+        return ctC.dadosCliente(cod);
+        
+    }
+            
+    public void editCli(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String tel) throws ClassNotFoundException{
+       Cliente cli = new Cliente(nome, rg, cpf, endereco, cidade, estado, tel);
+       ctC.altCliente(cli);
     }
     
     public void rmCli(int cod) throws ClassNotFoundException {

@@ -9,6 +9,7 @@ package br.com.systemcgl.controle;
 import br.com.systemcgl.entidades.Cliente;
 import br.com.systemcgl.repositorio.RepositorioCliente;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.xml.transform.Result;
 
 /**
@@ -19,6 +20,7 @@ public class ControleCliente {
     RepositorioCliente rc = new RepositorioCliente();
     
     public void cadCliente(Cliente cli) throws ClassNotFoundException{
+        cli.setPendencias("Não");
         rc.svCliente(cli);
         
     }
@@ -26,6 +28,17 @@ public class ControleCliente {
     public ResultSet dadosTabCli() throws ClassNotFoundException{
         return rc.mostraClientes();
     }
+    public Cliente dadosCliente(int cod) throws SQLException, ClassNotFoundException{
+        
+        return rc.getCliente(cod);
+    }
+   
+    public void altCliente (Cliente cli) throws ClassNotFoundException{
+        
+        rc.alterCliente(cli.getCod(), cli.getNome(),cli.getRg(), cli.getCpf(), cli.getEndereco(), cli.getCidade(), cli.getEstado(), cli.getTelefone());
+        
+    }
+    
     
     public void remCli (int cod) throws ClassNotFoundException{
         

@@ -13,25 +13,25 @@ import br.com.systemcgl.entidades.Usuario;
  * @author zare
  */
 public class ControleSessao {
-    Sessao s;
+    Sessao s = new Sessao();
     
     
-    public boolean abrirSessao (Usuario usr) throws ClassNotFoundException{
+    public Sessao sessaoId (Usuario usr) throws ClassNotFoundException {
         
-        s = new Sessao(usr, true);
-        if (ControleSenha.comparaSenha(usr)) 
-            return true;
-        else 
-            return false;
+        s.setId(usr.getId());
+        if ("admin".equals(usr.getId())) {
+            s.setAdm(true);
+        } else {
+            s.setAdm(false);
+        }
+        if (ControleSenha.comparaSenha(usr)) {
+            s.setAuth(true);
+        } else {
+            s.setAuth(false);
+        }
         
-        
+        return s;           
     }
     
-   public void fecharSessao (){
-       Usuario usr = new Usuario();
-       
-       s = new Sessao(usr, false);
-       
-       
-   } 
+ 
 }

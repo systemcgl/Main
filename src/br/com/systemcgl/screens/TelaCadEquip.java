@@ -9,7 +9,12 @@ package br.com.systemcgl.screens;
 import java.awt.Dimension;
 import br.com.systemcgl.Fachada;
 import br.com.systemcgl.entidades.Equipamento;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author zare
@@ -20,8 +25,17 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
      * Creates new form TelaCadEquip
      */
     private Fachada f = new Fachada();
+    JTable jt;
     public TelaCadEquip() {
         initComponents();
+        
+    }
+    
+    public TelaCadEquip (JTable jt){
+        this();
+        
+        this.jt = jt;
+        
         
     }
  /*   public TelaCadEquip(Dimension t) {
@@ -46,14 +60,16 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
         CampoSerial = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        CampoValor = new javax.swing.JTextField();
         CampoModelo = new javax.swing.JTextField();
         CampoMarca = new javax.swing.JTextField();
         Cadastrar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
+        CampoValor = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Cadastrar Equipamento");
+        setLayer(1);
 
         jLabel1.setText("Marca:");
 
@@ -65,6 +81,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Valor da Locação:");
 
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Ok-20x20.png"))); // NOI18N
         Cadastrar.setText("Cadastrar");
         Cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +89,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
             }
         });
 
+        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,25 +97,34 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
             }
         });
 
+        CampoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        CampoValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoValorActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("R$");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(263, 263, 263)
                         .addComponent(Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Cadastrar)
                         .addGap(206, 206, 206))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -107,16 +134,19 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CampoModelo)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(CampoSerial))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(13, 13, 13)
+                                .addComponent(CampoSerial))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addGap(6, 6, 6)
+                                .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -135,10 +165,11 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(CampoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(CampoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar)
                     .addComponent(Cancelar))
@@ -159,6 +190,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
         String modelo = CampoModelo.getText();
         String serial = CampoSerial.getText();
         String vl = CampoValor.getText();
+        
         try {
             Double valor = Double.parseDouble(vl.replace(",", "."));
             if (nome.equals("") || marca.equals("") || modelo.equals("") || serial.equals("") || valor == 0) {
@@ -171,8 +203,11 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
                     f.cadEquip(eq);
                     JOptionPane.showMessageDialog(rootPane, "Equipamento cadastrado com sucesso!!");
                     this.dispose();
+                    jt.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip()));
                 } catch (ClassNotFoundException ee) {
                     System.err.println(ee);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaCadEquip.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } catch (NumberFormatException e) {
@@ -183,6 +218,10 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
 
         
     }//GEN-LAST:event_CadastrarActionPerformed
+
+    private void CampoValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoValorActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -191,12 +230,13 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
     private javax.swing.JTextField CampoModelo;
     private javax.swing.JTextField CampoNome;
     private javax.swing.JTextField CampoSerial;
-    private javax.swing.JTextField CampoValor;
+    private javax.swing.JFormattedTextField CampoValor;
     private javax.swing.JButton Cancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

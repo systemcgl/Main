@@ -13,7 +13,7 @@ package br.com.systemcgl.entidades;
 public class Cliente {
 
 
-    private int    id;
+    private int    cod;
     private String nome;
     private String rg;
     private String cpf;
@@ -23,8 +23,8 @@ public class Cliente {
     private String telefone;
     private String pendencias; //Sinaliza se o cliente possui ou não pendencias
     
-    public Cliente(int id, String nome, String rg, String cpf, String endereco, String estado, String cidade, String telefone, String pendencias) {
-        this.id = id;
+    public Cliente(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone, String pendencias) {
+        this.cod = cod;
         this.nome = nome;
         this.rg = rg;
         this.cpf = cpf;
@@ -43,15 +43,25 @@ public class Cliente {
         this.cidade = cidade;
         this.estado = estado;
         this.telefone = telefone;
-        this.pendencias = "Não";
+        
+    }
+     public Cliente(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone) {
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.telefone = telefone;
+        this.cod = cod;
     }
 
-    public int getId() {
-        return id;
+    public int getCod() {
+        return cod;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int cod) {
+        this.cod = cod;
     }
     
  

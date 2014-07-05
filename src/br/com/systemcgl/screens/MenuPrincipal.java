@@ -7,6 +7,7 @@
 package br.com.systemcgl.screens;
 
 import java.awt.Dimension;
+import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import net.proteanit.sql.DbUtils;
  * @author zare
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    String idSessao;
+    boolean isAdm;
     /**
      * Creates new form MenuPrincipal
      */
@@ -27,9 +28,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
-    public MenuPrincipal(String id) {
+    public MenuPrincipal(boolean isAdm) {
         this();
-        this.idSessao = id;
+        this.isAdm = isAdm;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +44,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         Loca = new javax.swing.JButton();
         DevEquip = new javax.swing.JButton();
-        CadEquip = new javax.swing.JButton();
+        Equipamentos = new javax.swing.JButton();
         Clientes = new javax.swing.JButton();
         Caixa = new javax.swing.JButton();
         jDesktopPane = new javax.swing.JDesktopPane();
@@ -90,18 +91,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         DevEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(DevEquip);
 
-        CadEquip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/computer-add-42x42.png"))); // NOI18N
-        CadEquip.setFocusable(false);
-        CadEquip.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        CadEquip.setMaximumSize(new java.awt.Dimension(60, 60));
-        CadEquip.setMinimumSize(new java.awt.Dimension(50, 50));
-        CadEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CadEquip.addActionListener(new java.awt.event.ActionListener() {
+        Equipamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/computer-42x42.png"))); // NOI18N
+        Equipamentos.setFocusable(false);
+        Equipamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Equipamentos.setMaximumSize(new java.awt.Dimension(60, 60));
+        Equipamentos.setMinimumSize(new java.awt.Dimension(50, 50));
+        Equipamentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Equipamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadEquipActionPerformed(evt);
+                EquipamentosActionPerformed(evt);
             }
         });
-        jToolBar1.add(CadEquip);
+        jToolBar1.add(Equipamentos);
 
         Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Client-Male-Dark-42x42.png"))); // NOI18N
         Clientes.setFocusable(false);
@@ -203,7 +204,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
        
         TelaUsers users = null;
         try {
-            new TelaUsers(this, idSessao).setVisible(true);
+            new TelaUsers(this, isAdm).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -221,24 +222,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 }
     }//GEN-LAST:event_formWindowClosing
 
-    private void CadEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadEquipActionPerformed
-        // TODO add your handling code here:
-       // Dimension t = jDesktopPane.getSize();
-       TelaCadEquip cadEquip = new TelaCadEquip();
-       cadEquip.setVisible(true);
-       jDesktopPane.add(cadEquip);
-    }//GEN-LAST:event_CadEquipActionPerformed
+    private void EquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquipamentosActionPerformed
+       
+               TelaEquipamentos te ;
+        try {
+            te = new TelaEquipamentos(jDesktopPane);
+            te.setVisible(true);
+            
+            jDesktopPane.add(te);
+            te.setMaximum(true);
+            
+        } catch (ClassNotFoundException | SQLException | PropertyVetoException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_EquipamentosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        TelaEquipamentos buscEquip ;
-        try {
-            buscEquip = new TelaEquipamentos(jDesktopPane);
-            buscEquip.setVisible(true);
-            jDesktopPane.add(buscEquip);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -248,8 +250,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             tc = new TelaClientes(jDesktopPane);
             tc.setVisible(true);
+            
             jDesktopPane.add(tc);
-        } catch (ClassNotFoundException ex) {
+            tc.setMaximum(true);
+           
+        } catch (ClassNotFoundException | PropertyVetoException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -291,11 +296,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadEquip;
     private javax.swing.JButton Caixa;
     private javax.swing.JButton Clientes;
     private javax.swing.JButton DevEquip;
     private javax.swing.JMenu EditUser;
+    private javax.swing.JButton Equipamentos;
     private javax.swing.JButton Loca;
     private javax.swing.JMenuItem Usuarios;
     private javax.swing.JDesktopPane jDesktopPane;

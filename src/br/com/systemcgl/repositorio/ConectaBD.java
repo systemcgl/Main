@@ -19,7 +19,7 @@ public class ConectaBD {
     public static Connection conect () throws ClassNotFoundException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/systemcgl", "root", "123456");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/systemcgl", "root", "");
             System.out.println("Conectado ao banco de dados");
             return con;
             

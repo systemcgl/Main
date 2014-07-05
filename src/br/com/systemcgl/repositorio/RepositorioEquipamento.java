@@ -65,12 +65,12 @@ public class RepositorioEquipamento {
     
     
 
-    public void delEquip(int id) throws ClassNotFoundException {
+    public void delEquip(int cod) throws ClassNotFoundException {
         conect = ConectaBD.conect();        
-        String sql = "delete from equipamento where serial=?";
+        String sql = "delete from equipamento where codEquipamento=?";
         try {
             pst = conect.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setInt(1, cod);
             pst.execute();
             
         } catch (SQLException e) {
