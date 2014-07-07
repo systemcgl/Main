@@ -24,7 +24,7 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCadEquip
      */
-    private Fachada f = new Fachada();
+    Fachada f = new Fachada();
     JTable jt;
     public TelaCadEquip() {
         initComponents();
@@ -190,9 +190,10 @@ public class TelaCadEquip extends javax.swing.JInternalFrame {
         String modelo = CampoModelo.getText();
         String serial = CampoSerial.getText();
         String vl = CampoValor.getText();
-        
+        System.out.println(vl);
         try {
             Double valor = Double.parseDouble(vl.replace(",", "."));
+            System.out.println(valor);
             if (nome.equals("") || marca.equals("") || modelo.equals("") || serial.equals("") || valor == 0) {
                 JOptionPane.showMessageDialog(this, "Você deixou algum campo em branco?");
             } else {

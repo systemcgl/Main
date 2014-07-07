@@ -103,7 +103,7 @@ public class Fachada {
     }
             
     public void editCli(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String tel) throws ClassNotFoundException{
-       Cliente cli = new Cliente(nome, rg, cpf, endereco, cidade, estado, tel);
+       Cliente cli = new Cliente(cod, nome, rg, cpf, endereco, cidade, estado, tel);
        ctC.altCliente(cli);
     }
     

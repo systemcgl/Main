@@ -30,6 +30,7 @@ public class Equipamento {
         this.serial = serial;
         this.valorLoca = valorLoca;
         this.disponivel = "Sim";
+        
     }
 
     public Equipamento(String nome, String marca, String modelo, String serial, Double valorLoca, String disponivel) {
@@ -50,6 +51,7 @@ public class Equipamento {
         this.valorLoca = valorLoca;
         this.disponivel = disponivel;
     }
+    
 
     public int getCod() {
         return cod;

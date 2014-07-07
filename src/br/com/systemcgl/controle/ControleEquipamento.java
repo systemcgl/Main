@@ -56,7 +56,7 @@ public class ControleEquipamento {
     }
     
     public void alterEquip (Equipamento eq) throws ClassNotFoundException{
-        eq.setCod(eq.getCod() + 1);
+        eq.setCod(eq.getCod());
         
         re.alterEquip(eq.getCod(),eq.getNome(), eq.getMarca(), eq.getModelo(), eq.getSerial(), eq.getValorLoca());
         

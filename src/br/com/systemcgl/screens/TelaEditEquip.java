@@ -25,7 +25,7 @@ public class TelaEditEquip extends javax.swing.JInternalFrame {
      * Creates new form TelaEditEquip
      */
     private Fachada f = new Fachada();
-    private Equipamento eq = new Equipamento();
+    private Equipamento eq;
     private JTable jt = new JTable();
     
     public TelaEditEquip() {
@@ -206,9 +206,13 @@ public class TelaEditEquip extends javax.swing.JInternalFrame {
             } else {
 
                 System.out.println("recebeu: " + nome + " " + " " + marca + " " + modelo + " " + serial + " " + valor);
-                Equipamento eq2 = new Equipamento(nome, marca, modelo, serial, valor);
+                eq.setNome(nome);
+                eq.setMarca(marca);
+                eq.setModelo(modelo);
+                eq.setSerial(serial);
+                eq.setValorLoca(valor);
                 try {
-                    f.editEquip(eq2);
+                    f.editEquip(eq);
                     JOptionPane.showMessageDialog(rootPane, "Dados alterados com sucesso!!");
                     jt.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip()));
                     this.dispose();

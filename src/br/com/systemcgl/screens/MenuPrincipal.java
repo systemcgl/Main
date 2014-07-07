@@ -54,7 +54,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         EditUser = new javax.swing.JMenu();
         Usuarios = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuEquip = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -74,7 +74,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Loca.setFocusable(false);
         Loca.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Loca.setMaximumSize(new java.awt.Dimension(60, 60));
-        Loca.setMinimumSize(new java.awt.Dimension(52, 52));
         Loca.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Loca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +107,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Clientes.setFocusable(false);
         Clientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Clientes.setMaximumSize(new java.awt.Dimension(60, 60));
-        Clientes.setMinimumSize(new java.awt.Dimension(52, 52));
         Clientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +119,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Caixa.setFocusable(false);
         Caixa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Caixa.setMaximumSize(new java.awt.Dimension(60, 60));
-        Caixa.setMinimumSize(new java.awt.Dimension(52, 52));
         Caixa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(Caixa);
 
@@ -153,14 +150,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         EditUser.add(Usuarios);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
-        jMenuItem3.setText("Equipamentos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuEquip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
+        jMenuEquip.setText("Equipamentos");
+        jMenuEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuEquipActionPerformed(evt);
             }
         });
-        EditUser.add(jMenuItem3);
+        EditUser.add(jMenuEquip);
 
         jMenuBar1.add(EditUser);
 
@@ -200,17 +197,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuariosActionPerformed
         // Abre tela para editar usuários
+       if (isAdm == true) {
+                   TelaUsers users = null;
+        try {
+            new TelaUsers(this).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
         this.setEnabled(false);
        
-        TelaUsers users = null;
-        try {
-            new TelaUsers(this, isAdm).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+        
+       }
         
     }//GEN-LAST:event_UsuariosActionPerformed
 
@@ -238,11 +237,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_EquipamentosActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEquipActionPerformed
         // TODO add your handling code here:
-
+        this.EquipamentosActionPerformed(evt);
         
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuEquipActionPerformed
 
     private void ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesActionPerformed
         // TODO add your handling code here:
@@ -308,9 +307,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuEquip;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

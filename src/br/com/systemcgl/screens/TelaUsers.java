@@ -26,7 +26,7 @@ public class TelaUsers extends javax.swing.JFrame {
     Fachada f = new Fachada() ;
     ResultSet rs;
     Usuario usr = new Usuario();
-    boolean isAdm;
+    
     
     /**
      * Creates new form TelaUsers
@@ -43,12 +43,12 @@ public class TelaUsers extends javax.swing.JFrame {
     }
     
 
-    public TelaUsers (MenuPrincipal telaAnterior, boolean isAdm) throws ClassNotFoundException, SQLException{
+    public TelaUsers (MenuPrincipal telaAnterior) throws ClassNotFoundException, SQLException{
         
         this();
         
         this.telaAnterior = telaAnterior;
-        this.isAdm = isAdm;        
+                
     }
     
  
@@ -200,13 +200,12 @@ public class TelaUsers extends javax.swing.JFrame {
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
         try {
             if (!usr.getId().equals("")) {
-                if (isAdm == true) {
+                
                     this.setEnabled(false);
                     TelaEditUser ted = new TelaEditUser(usr, this);
                     ted.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
-                }
+                 
+                
             }
         } catch (NullPointerException e) {
             System.err.println("nenhum usuário selecionado"); 

@@ -23,7 +23,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class TelaEquipamentos extends javax.swing.JInternalFrame {
     Fachada f = new Fachada() ;
-    ResultSet rs;
+    ResultSet rs ;
     Equipamento eq = new Equipamento();
     JDesktopPane jd;
     
@@ -39,6 +39,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         initComponents();
         
         JTableEquip.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip())); 
+        
         
     }
 
@@ -199,7 +200,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         vltemp = (JTableEquip.getModel().getValueAt(seleciona, 5).toString());
         eq.setValorLoca(Double.parseDouble(vltemp));
         eq.setDisponivel(JTableEquip.getModel().getValueAt(seleciona, 6).toString());
-        System.out.println("selecionou o "+eq.getCod());
+        System.out.println("selecionou o equipamento de código: "+eq.getCod());
     }//GEN-LAST:event_JTableEquipMouseClicked
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
@@ -218,7 +219,7 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
-        TelaCadEquip cadEquip = new TelaCadEquip();
+        TelaCadEquip cadEquip = new TelaCadEquip(JTableEquip);
         cadEquip.setVisible(true);
         cadEquip.setLocation(jd.getWidth()/2 - cadEquip.getWidth()/2, jd.getHeight()/2 - cadEquip.getHeight()/2) ;
         jd.add(cadEquip);

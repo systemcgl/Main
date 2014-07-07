@@ -83,7 +83,7 @@ public class RepositorioCliente {
     public void alterCliente(int cod, String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone) throws ClassNotFoundException{
        conect = ConectaBD.conect();
        String sql = "update cliente set nome=?, rg=?, cpf=?, endereco=?, cidade=?, estado=?, telefone=? where codCliente=?";
-       
+       System.out.println(cod+" "+nome);
         try {
             pst = conect.prepareStatement(sql);
             pst.setString(1, nome);
@@ -94,6 +94,7 @@ public class RepositorioCliente {
             pst.setString(6, estado);
             pst.setString(7, telefone);
             pst.setInt(8, cod);
+            pst.executeUpdate();
             System.out.println("Dados do cliente alterados");
         } catch (SQLException e) {
             System.err.println(e);
