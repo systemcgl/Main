@@ -30,7 +30,7 @@ public class ControleUsuario {
       //validar
       if (nome.length() != 0 && id.length() != 0 && senha.length() != 0) {
        
-          //Criptografar senha
+          //Criptografar Senha
           
           senha = ControleSenha.criptoSenha(senha);
           

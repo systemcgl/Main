@@ -246,7 +246,7 @@ public class TelaUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setEnabled(false);
         
-        TelaCadUser cadUser = new TelaCadUser(this);
+        TelaCadUser cadUser = new TelaCadUser(this, JTableUsuarios);
         cadUser.setVisible(true);
         
     }//GEN-LAST:event_AdicionarActionPerformed

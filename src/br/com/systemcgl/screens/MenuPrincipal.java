@@ -20,6 +20,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
     boolean isAdm;
+    String id;
     /**
      * Creates new form MenuPrincipal
      */
@@ -28,9 +29,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
-    public MenuPrincipal(boolean isAdm) {
+    public MenuPrincipal(boolean isAdm, String id) {
         this();
         this.isAdm = isAdm;
+        this.id = id;
+        UsuarioLabel2.setText(id);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +50,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Equipamentos = new javax.swing.JButton();
         Clientes = new javax.swing.JButton();
         Caixa = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        UsuarioLabel1 = new javax.swing.JLabel();
+        UsuarioLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -122,6 +129,44 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Caixa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(Caixa);
 
+        UsuarioLabel1.setText("Usuário:");
+
+        UsuarioLabel2.setText("jLabel1");
+
+        jButton2.setText("Sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(449, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(UsuarioLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UsuarioLabel2)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsuarioLabel1)
+                    .addComponent(UsuarioLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
+        );
+
+        jToolBar1.add(jPanel1);
+
         jDesktopPane.setBackground(new java.awt.Color(113, 113, 113));
 
         jMenu1.setText("Arquivo");
@@ -173,7 +218,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1067, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
             .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
@@ -218,6 +263,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int resp = JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "Sair", JOptionPane.YES_NO_OPTION);
                 if (resp == JOptionPane.YES_NO_OPTION) {
                     this.dispose();
+                    
                 }
     }//GEN-LAST:event_formWindowClosing
 
@@ -258,6 +304,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ClientesActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.formWindowClosing(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,7 +352,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu EditUser;
     private javax.swing.JButton Equipamentos;
     private javax.swing.JButton Loca;
+    private javax.swing.JLabel UsuarioLabel1;
+    private javax.swing.JLabel UsuarioLabel2;
     private javax.swing.JMenuItem Usuarios;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -310,6 +364,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuEquip;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

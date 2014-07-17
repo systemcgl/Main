@@ -7,9 +7,12 @@
 package br.com.systemcgl.screens;
 
 import br.com.systemcgl.Fachada;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -18,20 +21,21 @@ import javax.swing.JOptionPane;
 public class TelaCadUser extends javax.swing.JFrame {
 
     private TelaUsers telaAnterior;
+    private JTable jt;
     
     private TelaCadUser() {
         initComponents();
     }
     
 
-        public TelaCadUser (TelaUsers telaAnterior) {
+        public TelaCadUser (TelaUsers telaAnterior, JTable jt) {
         //chamar o contrutor padrão
         this();
         
         //atribuir a instancia 
         
         this.telaAnterior = telaAnterior;
-        
+        this.jt = jt;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,11 +78,6 @@ public class TelaCadUser extends javax.swing.JFrame {
 
         campoNome.setDisabledTextColor(new java.awt.Color(177, 177, 177));
         campoNome.setDoubleBuffered(true);
-        campoNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNomeActionPerformed(evt);
-            }
-        });
 
         BotaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Cancel-20x20.png"))); // NOI18N
         BotaoCancelar.setText("Cancelar");
@@ -93,24 +92,6 @@ public class TelaCadUser extends javax.swing.JFrame {
         jLabel11.setText("Senha:");
 
         jLabel12.setText("Confirmação de senha:");
-
-        campoId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoIdActionPerformed(evt);
-            }
-        });
-
-        campoSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoSenhaActionPerformed(evt);
-            }
-        });
-
-        campoConfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoConfSenhaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,22 +153,6 @@ public class TelaCadUser extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoNomeActionPerformed
-
-    private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoIdActionPerformed
-
-    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoSenhaActionPerformed
-
-    private void campoConfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoConfSenhaActionPerformed
-
     private void BotaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCancelarActionPerformed
         // sair
         this.dispose();
@@ -213,19 +178,19 @@ public class TelaCadUser extends javax.swing.JFrame {
         System.out.println( "Criou variáveis: Nome: "+nome + " ID: " + id + " Senha:  ******"  + " Confirmação de senha: ******" );
         // Tratamento de fluxos secundarios e envio das informaçoes
          if (senha.equals(confSenha) == false) {
-                JOptionPane.showMessageDialog(null, "A Senha e a Confirmação de Senha não Coincidem!!");
+                JOptionPane.showMessageDialog(this, "A Senha e a Confirmação de Senha não Coincidem!!");
             } else {
              Fachada f = new Fachada();
             try {
                 if( f.cadUser(nome, id, senha) == true){
-                    JOptionPane.showMessageDialog(null, "Usuário Criado com Sucesso!!");
-                   
+                    JOptionPane.showMessageDialog(this, "Usuário Criado com Sucesso!!");
+                    jt.setModel(DbUtils.resultSetToTableModel(f.mostraTUsr()));
                     this.dispose();
                     telaAnterior.setEnabled(true);
                 }else {
                     JOptionPane.showMessageDialog(null, "Você deixou algum campo em branco!!");
                 }
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(TelaCadUser.class.getName()).log(Level.SEVERE, null, ex);
             }
             }

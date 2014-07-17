@@ -117,9 +117,6 @@
         </Property>
         <Property name="doubleBuffered" type="boolean" value="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNomeActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BotaoCancelar">
       <Properties>
@@ -148,19 +145,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoId">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoIdActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="campoSenha">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoSenhaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="campoConfSenha">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoConfSenhaActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
