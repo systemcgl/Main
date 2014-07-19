@@ -6,19 +6,56 @@
 
 package br.com.systemcgl.screens;
 
+import br.com.systemcgl.Fachada;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author zare
  */
 public class TelaLoca extends javax.swing.JInternalFrame {
+    private int qtdDias = 1;
+    Fachada f = new Fachada();
+    JDesktopPane jd;
+    private ArrayList<Integer> equips = new ArrayList<>();
+    private int codCLiente;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private Date dataLoca = new Date();
+    private Date dataDevo;
+   
+    private Double valor = 0.00;
+
+    public TelaLoca() {
+        initComponents();
+        CampoValor.setText(valor.toString());
+        
+         
+        
+        CampoDataLoca.setText(sdf.format(dataLoca));
+    }
+
+    public TelaLoca(JDesktopPane jd) {
+        this();
+        this.jd = jd;
+    }
+    
+    
 
     /**
      * Creates new form TelaLoca
      */
-    public TelaLoca() {
-        initComponents();
-    }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,23 +68,22 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        CampoCliente = new javax.swing.JTextField();
+        CampoEquip = new javax.swing.JTextField();
+        CampoValor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        BuscaCliente = new javax.swing.JButton();
-        BuscaEquipamentos = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        selectCliente = new javax.swing.JButton();
+        AddEquipamentos = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        CampoDataLoca = new javax.swing.JFormattedTextField();
+        CampoDataDevo = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -56,12 +92,22 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jTextField1.setText("  /  /    ");
-
-        jTextField5.setText("  /  /  ");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+        setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -71,21 +117,61 @@ public class TelaLoca extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Cliente:");
 
-        jLabel4.setText("Quantidade de dias:");
-
         jLabel5.setText("Data Devolução:");
 
         jLabel6.setText("Valor:");
 
-        BuscaCliente.setText("...");
+        selectCliente.setText("...");
+        selectCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectClienteActionPerformed(evt);
+            }
+        });
 
-        BuscaEquipamentos.setText("...");
+        AddEquipamentos.setText("...");
+        AddEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEquipamentosActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Confirmar");
+        Confirmar.setText("Confirmar");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Imprimir Orçamento");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Cancelar");
+
+        try {
+            CampoDataLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            CampoDataDevo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        CampoDataDevo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CampoDataDevoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CampoDataDevoKeyReleased(evt);
+            }
+        });
+
+        jLabel4.setText("R$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,80 +180,77 @@ public class TelaLoca extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(0, 51, Short.MAX_VALUE)
+                        .addComponent(jButton5)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(49, 49, 49)
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BuscaCliente)
-                                    .addComponent(BuscaEquipamentos)))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(Confirmar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
+                        .addGap(90, 90, 90)
                         .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(CampoDataDevo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(464, 464, 464))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CampoDataLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CampoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectCliente)
+                            .addComponent(AddEquipamentos))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 270, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(233, 233, 233))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(CampoDataLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuscaCliente))
+                    .addComponent(CampoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectCliente))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(BuscaEquipamentos))
-                .addGap(18, 18, 18)
+                    .addComponent(AddEquipamentos)
+                    .addComponent(CampoEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(36, 36, 36)
+                    .addComponent(jLabel5)
+                    .addComponent(CampoDataDevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(Confirmar)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addGap(36, 36, 36))
@@ -176,16 +259,104 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void AddEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEquipamentosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+        try {
+            TelaLocaEquip tle = new TelaLocaEquip(this);
+            tle.setVisible(true);
+            jd.add(tle);
+            AddEquipamentos.setEnabled(false);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e);
+        }
+        
+    }//GEN-LAST:event_AddEquipamentosActionPerformed
+
+    private void selectClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectClienteActionPerformed
+        // TODO add your handling code here:
+        try {
+            TelaLocaCli tlc = new TelaLocaCli(this);
+            tlc.setVisible(true);
+            selectCliente.setEnabled(false);
+            jd.add(tlc);
+           
+        } catch (ClassNotFoundException e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_selectClienteActionPerformed
+
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+        
+        System.out.println(equips.toString());
+        
+        
+        
+        if (codCLiente==0 || valor == 0 || dataDevo == null)
+            JOptionPane.showMessageDialog(this, "Você deixou algum dado em branco?");
+        else{
+            try {
+                f.locEquips(dataLoca, codCLiente, equips, dataDevo, valor);
+                JOptionPane.showMessageDialog(this, "Operação realizada com Sucesso");
+                this.dispose();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaLoca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+         
+        
+    }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void CampoDataDevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoDataDevoKeyPressed
+        // TODO add your handling code here:
+        
+            
+    }//GEN-LAST:event_CampoDataDevoKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void CampoDataDevoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoDataDevoKeyReleased
+        // TODO add your handling code here:
+        if (CampoDataDevo.getText().charAt(9) != ' ') {
+            try {
+                dataDevo = sdf.parse(CampoDataDevo.getText());
+                dataLoca = sdf.parse(sdf.format(dataLoca));
+                if (dataDevo.getTime() < dataLoca.getTime()) {
+                    JOptionPane.showMessageDialog(this, "A data de devolução deve ser maior que a data da locação!");
+                } else {
+                    if (dataDevo.getTime() - dataLoca.getTime() != 0) {
+                        qtdDias = (int) ((dataDevo.getTime() - dataLoca.getTime()) / 86400000L);
+                        qtdDias +=1;
+                        valor *= qtdDias;
+                        
+                        CampoValor.setText(valor.toString());
+                    }
+
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaLoca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_CampoDataDevoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BuscaCliente;
-    private javax.swing.JButton BuscaEquipamentos;
+    private javax.swing.JButton AddEquipamentos;
+    private javax.swing.JTextField CampoCliente;
+    private javax.swing.JFormattedTextField CampoDataDevo;
+    private javax.swing.JFormattedTextField CampoDataLoca;
+    private javax.swing.JTextField CampoEquip;
+    private javax.swing.JTextField CampoValor;
+    private javax.swing.JButton Confirmar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -196,11 +367,73 @@ public class TelaLoca extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JButton selectCliente;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getCampoValor() {
+        return CampoValor;
+    }
+
+    public void setCampoValor(JTextField CampoValor) {
+        this.CampoValor = CampoValor;
+    }
+
+    public JTextField getCampoEquip() {
+        return CampoEquip;
+    }
+
+    public void setCampoEquip(JTextField CampoEquip) {
+        this.CampoEquip = CampoEquip;
+    }
+
+ 
+
+
+    
+
+    public JTextField getCampoCliente() {
+        return CampoCliente;
+    }
+
+    public JButton getAddEquipamentos() {
+        return AddEquipamentos;
+    }
+
+    public JButton getSelectCliente() {
+        return selectCliente;
+    }
+
+    public int getCodCLiente() {
+        return codCLiente;
+    }
+
+    public void setCodCLiente(int codCLiente) {
+        this.codCLiente = codCLiente;
+    }
+
+    public ArrayList<Integer> getEquips() {
+        return equips;
+    }
+
+    public void setEquips(ArrayList<Integer> equips) {
+        this.equips = equips;
+    }
+
+
+    
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public int getQtdDias() {
+        return qtdDias;
+    }
+
+    public void setQtdDias(int qtdDias) {
+        this.qtdDias = qtdDias;
+    }
 }

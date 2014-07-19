@@ -1,5 +1,4 @@
 drop database systemcgl if exixts;
-
 create database systemcgl;
 
 use systemcgl;

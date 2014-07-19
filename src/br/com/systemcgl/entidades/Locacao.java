@@ -6,7 +6,9 @@
 
 package br.com.systemcgl.entidades;
 
-import java.text.DateFormat;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,43 +17,42 @@ import java.text.DateFormat;
 public class Locacao {
 
     
-    private DateFormat dataLocacao;
+    private Date dataLocacao;
     private int qtd_dias; 
     private Double valor;
     //situação da operação, se for true = entregue, se for false = pendente
-    private boolean situacao;
+    private String situacao;
     //lista dos equipamentos a serem locados. Recebe a id do equipamento
-    private EquipsLocacao equips;
+    private ArrayList<Integer> equips[];
 
-    private int id_cliente;
-    private DateFormat dataEntrega;
+    private int codCliente;
+    private Date dataEntrega;
     
     //Contrutor
-    public Locacao(DateFormat dataLocacao, int qtd_dias, double valor, boolean situacao, EquipsLocacao equips, int id_cliente, DateFormat dataEntrega) {
+    public Locacao(Date dataLocacao, int codCliente, ArrayList<Integer> equips, Date dataEntrega, double valor, String situacao) {
         this.dataLocacao = dataLocacao;
-        this.qtd_dias = qtd_dias;
         this.valor = valor;
         this.situacao = situacao;
-        this.equips = equips;
-        this.id_cliente = id_cliente;
+        this.codCliente = codCliente;
         this.dataEntrega = dataEntrega;
     }
+
 
 
     //Getters e Setters
-    public DateFormat getDataEntrega() {
+    public Date getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(DateFormat dataEntrega) {
+    public void setDataEntrega(Date dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
-    public DateFormat getDataLocacao() {
+    public Date getDataLocacao() {
         return dataLocacao;
     }
 
-    public void setDataLocacao(DateFormat dataLocacao) {
+    public void setDataLocacao(Date dataLocacao) {
         this.dataLocacao = dataLocacao;
     }
 
@@ -71,28 +72,24 @@ public class Locacao {
         this.valor = valor;
     }
 
-    public boolean isSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
-    public EquipsLocacao getEquips() {
-        return equips;
+
+
+    public int getCodCliente() {
+        return codCliente;
     }
 
-    public void setEquips(EquipsLocacao equips) {
-        this.equips = equips;
+    public void setCodCliente(int codCliente) {
+        this.codCliente = codCliente;
     }
 
-    public int getId_cliente() {
-        return id_cliente;
-    }
-
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
-    }
+   
     
     
 }

@@ -9,6 +9,7 @@ package br.com.systemcgl.screens;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -95,6 +96,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         DevEquip.setMaximumSize(new java.awt.Dimension(60, 60));
         DevEquip.setMinimumSize(new java.awt.Dimension(50, 50));
         DevEquip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        DevEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DevEquipActionPerformed(evt);
+            }
+        });
         jToolBar1.add(DevEquip);
 
         Equipamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/computer-42x42.png"))); // NOI18N
@@ -234,6 +240,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void LocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocaActionPerformed
         // TODO add your handling code here:
+        TelaLoca tl = new TelaLoca(jDesktopPane);
+        tl.setVisible(true);
+        jDesktopPane.add(tl);
+        try {
+            tl.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LocaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -309,6 +323,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.formWindowClosing(null);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void DevEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevEquipActionPerformed
+        // TODO add your handling code here:
+        TelaDevo td;
+
+        try {
+            td = new TelaDevo();
+            td.setVisible(true);
+            jDesktopPane.add(td);
+        } catch (ClassNotFoundException | ParseException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_DevEquipActionPerformed
 
     /**
      * @param args the command line arguments

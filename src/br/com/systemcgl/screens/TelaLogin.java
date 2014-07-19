@@ -25,6 +25,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        this.getRootPane().setDefaultButton(Entrar);
     }
 
     /**
@@ -68,6 +69,11 @@ public class TelaLogin extends javax.swing.JFrame {
         Entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EntrarActionPerformed(evt);
+            }
+        });
+        Entrar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                EntrarFocusGained(evt);
             }
         });
 
@@ -153,6 +159,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_formKeyPressed
+
+    private void EntrarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EntrarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EntrarFocusGained
 
     /**
      * @param args the command line arguments

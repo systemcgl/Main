@@ -7,6 +7,7 @@
 package br.com.systemcgl.repositorio;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -97,19 +98,44 @@ public class RepositorioEquipamento {
         
     }
     
-    public void alterEquip(int id, String atrib, double valor) throws ClassNotFoundException {
+    public void alterDisponibilidadeSIM (ArrayList<Integer> equipsList) throws ClassNotFoundException{
         conect = ConectaBD.conect();
-        String sql = "update equipamento set ?=? where id_equipamento=?";
+        String sql = "update equipamento set disponivel= 'Sim' where codEquipamento=? ";
+        
         try {
             pst = conect.prepareStatement(sql);
-            pst.setString(1, atrib);
-            pst.setDouble(2, valor);
-            pst.setInt(3, id);
+            
+            for (int i = 0; i < equipsList.size(); i++) {
+                pst.setInt(1, equipsList.get(i));
+                pst.addBatch();
+            }
+            pst.executeBatch();
         } catch (SQLException e) {
             System.err.println(e);
-            
         }
         
+        
     }
+    
+    public void alterDisponibilidadeNAO (ArrayList<Integer> equipsList) throws ClassNotFoundException{
+        conect = ConectaBD.conect();
+        String sql = "update equipamento set disponivel= 'Não' where codEquipamento=? ";
+        
+        try {
+            pst = conect.prepareStatement(sql);
+            
+            for (int i = 0; i < equipsList.size(); i++) {
+                pst.setInt(1, equipsList.get(i));
+                pst.addBatch();
+            }
+            pst.executeBatch();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        
+        
+    }
+        
+    
 
 }

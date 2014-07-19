@@ -27,9 +27,6 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
     Equipamento eq = new Equipamento();
     JDesktopPane jd;
     
-    
-    
-    
     /**
      * Creates new form TelaEquipamentos
      * @throws java.lang.ClassNotFoundException

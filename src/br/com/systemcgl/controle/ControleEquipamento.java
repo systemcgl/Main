@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,11 +56,20 @@ public class ControleEquipamento {
         re.delEquip(eq.getCod());
     }
     
-    public void alterEquip (Equipamento eq) throws ClassNotFoundException{
+    public void alterDadosEquip (Equipamento eq) throws ClassNotFoundException{
         eq.setCod(eq.getCod());
         
         re.alterEquip(eq.getCod(),eq.getNome(), eq.getMarca(), eq.getModelo(), eq.getSerial(), eq.getValorLoca());
         
+    }
+    
+    public void alterDispEquip(ArrayList<Integer> EquipsList, boolean pendencia) throws ClassNotFoundException{
+        if (pendencia==true){
+            re.alterDisponibilidadeSIM(EquipsList);
+        }else{
+            re.alterDisponibilidadeNAO(EquipsList);
+        }
+            
     }
 }
 

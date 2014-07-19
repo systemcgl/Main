@@ -6,10 +6,13 @@
 
 package br.com.systemcgl;
 
-import br.com.systemcgl.entidades.*;
 import br.com.systemcgl.controle.*;
+import br.com.systemcgl.entidades.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -22,7 +25,7 @@ public class Fachada {
     private ControleSessao ctSs = new ControleSessao();
     private ControleEquipamento ctE = new ControleEquipamento();
     private ControleCliente ctC = new ControleCliente();
- 
+    private ControleLocacao ctl = new ControleLocacao();
     
     public boolean cadUser (String nome, String id, String senha) throws ClassNotFoundException{
       
@@ -82,7 +85,7 @@ public class Fachada {
     }
     
     public void editEquip  (Equipamento eq)throws ClassNotFoundException{
-        ctE.alterEquip(eq);
+        ctE.alterDadosEquip(eq);
     }
     
     public void cadCli(String nome, String rg, String cpf, String endereco, String cidade, String estado, String telefone) throws ClassNotFoundException{
@@ -111,12 +114,22 @@ public class Fachada {
         ctC.remCli(cod);
     }
     
-    public void locEquip() {
+    public void locEquips(Date dataLoca, int codCliente, ArrayList<Integer> equipamentos, Date dataDevo, double valor ) throws ClassNotFoundException {
+        ctl.cadLocaDB(dataLoca, codCliente, equipamentos, dataDevo, valor);
+        ctE.alterDispEquip(equipamentos, false);
+        ctC.setPedenciaSim(codCliente);
+    }
+    public ResultSet mostraTabelaLoca() throws ClassNotFoundException{
         
+        return ctl.getDadosTLoca();
     }
     
-    public void devEquip() {
+    public void devEquip(int codLocacao) throws ClassNotFoundException, SQLException {
+        int codCliente = ctl.getCodClienteLoca(codLocacao);
+        ArrayList codEquip = ctl.finalizaLocacao(codLocacao);
         
+        ctC.setPendenciaNao(codCliente);
+        ctE.alterDispEquip(codEquip, true);
     }
     
     public void resEquip() {

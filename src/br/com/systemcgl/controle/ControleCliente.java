@@ -45,4 +45,13 @@ public class ControleCliente {
         rc.delCliente(cod);
         
     }
+    public void setPedenciaSim (int cod) throws ClassNotFoundException{
+        rc.addPendencia(cod);
+        
+    }
+    
+    public void setPendenciaNao (int cod) throws ClassNotFoundException{
+        
+        rc.delPendencia(cod);
+    }
 }

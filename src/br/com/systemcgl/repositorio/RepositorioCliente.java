@@ -117,5 +117,34 @@ public class RepositorioCliente {
                
         }
         
+         
+    }
+    
+    public void addPendencia (int cod) throws ClassNotFoundException{
+        conect = ConectaBD.conect();
+        String sql = "update cliente set pendencias = 'Sim' where codCliente=?";
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setInt(1, cod);
+            pst.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        
+    }
+    
+    public void delPendencia (int cod) throws ClassNotFoundException{
+        conect = ConectaBD.conect();
+        String sql = "update cliente set pendencias = 'Não' where codCliente=?";
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setInt(1, cod);
+            pst.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        
     }
 }
