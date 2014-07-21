@@ -5,16 +5,30 @@
         <group>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleLocacao.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLogin.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLoca.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaEquipamentos.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleCaixa.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/MenuPrincipal.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCaixa.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleUsuario.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioLocacao.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/Locacao.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipamento.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipsLoca.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioUsuario.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/Fachada.java</file>
-            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/ConectaBD.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLocaEquip.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleCliente.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioCliente.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLoca.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaDevo.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleSenha.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaAutenticacao.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLocaCli.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleEquipamento.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCadEquip.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaEquipamentos.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/TabelaLoca.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/Usuario.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleSessao.java</file>
         </group>
     </open-files>
 </project-private>

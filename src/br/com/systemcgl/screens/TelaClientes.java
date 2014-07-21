@@ -5,14 +5,15 @@
  */
 
 package br.com.systemcgl.screens;
-import net.proteanit.sql.DbUtils;
 import br.com.systemcgl.Fachada;
 import java.beans.PropertyVetoException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author zare
@@ -22,6 +23,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     Fachada f = new Fachada();
     JDesktopPane jd = new JDesktopPane();
     int cod;
+    ResultSet rs;
     /**
      * Creates new form TelaClientes
      * @throws java.lang.ClassNotFoundException
@@ -29,12 +31,12 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     public TelaClientes() throws ClassNotFoundException {
         initComponents();
         
-        jTableClientes.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
     }
 
     public TelaClientes (JDesktopPane jd) throws ClassNotFoundException{
         this();
-        
+        rs = f.tabClientes();
+        jTableClientes.setModel(DbUtils.resultSetToTableModel(rs));
         this.jd = jd;
     }
     /**
@@ -158,7 +160,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
-        TelaCadCli tcc = new TelaCadCli(jTableClientes);
+        TelaCadCli tcc = new TelaCadCli(jTableClientes, rs);
         tcc.setVisible(true);
         tcc.setLocation(jd.getWidth()/2 - tcc.getWidth()/2, jd.getHeight()/2 - tcc.getHeight()/2);
         jd.add(tcc);

@@ -38,6 +38,13 @@ public class Usuario {
         
     }
     
+    public Usuario(String id, String senha) {
+        
+        this.id = id;
+        this.senha = senha;
+        
+    }
+    
         public String getNome() {
         return nome;
     }

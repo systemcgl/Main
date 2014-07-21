@@ -19,22 +19,29 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author zare
  */
 public class TelaLoca extends javax.swing.JInternalFrame {
+    private DefaultTableModel modelo;
+    private Fachada f;
+    private JDesktopPane jd;
+    private ArrayList<Integer> equipsList = new ArrayList<>();
     private int qtdDias = 1;
-    Fachada f = new Fachada();
-    JDesktopPane jd;
-    private ArrayList<Integer> equips = new ArrayList<>();
+
+
+    private Double valor = 0.00;
+   
     private int codCLiente;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Date dataLoca = new Date();
     private Date dataDevo;
    
-    private Double valor = 0.00;
+    
 
     public TelaLoca() {
         initComponents();
@@ -45,8 +52,10 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         CampoDataLoca.setText(sdf.format(dataLoca));
     }
 
-    public TelaLoca(JDesktopPane jd) {
+    public TelaLoca(JDesktopPane jd, Fachada f) {
         this();
+        this.modelo = (DefaultTableModel)TabEquipsLoca.getModel();
+        this.f = f;
         this.jd = jd;
     }
     
@@ -68,11 +77,9 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        CampoCliente = new javax.swing.JTextField();
-        CampoEquip = new javax.swing.JTextField();
+        a = new javax.swing.JTextField();
         CampoValor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -80,10 +87,12 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         AddEquipamentos = new javax.swing.JButton();
         Confirmar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Cancelar = new javax.swing.JButton();
         CampoDataLoca = new javax.swing.JFormattedTextField();
         CampoDataDevo = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TabEquipsLoca = new javax.swing.JTable();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -112,8 +121,6 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Data Locação:");
-
-        jLabel2.setText("Equipamentos:");
 
         jLabel3.setText("Cliente:");
 
@@ -149,7 +156,12 @@ public class TelaLoca extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Cancelar");
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         try {
             CampoDataLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -173,6 +185,16 @@ public class TelaLoca extends javax.swing.JInternalFrame {
 
         jLabel4.setText("R$");
 
+        TabEquipsLoca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipamentos"
+            }
+        ));
+        jScrollPane2.setViewportView(TabEquipsLoca);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,47 +202,42 @@ public class TelaLoca extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 51, Short.MAX_VALUE)
-                        .addComponent(jButton5)
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CampoDataLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(a, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(AddEquipamentos)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(selectCliente))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(334, 334, 334)
+                        .addComponent(Cancelar)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)
                         .addGap(18, 18, 18)
                         .addComponent(Confirmar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(CampoDataDevo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(CampoDataDevo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(464, 464, 464))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CampoDataLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CampoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CampoEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectCliente)
-                            .addComponent(AddEquipamentos))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,28 +249,27 @@ public class TelaLoca extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(CampoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectCliente))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AddEquipamentos)
-                    .addComponent(CampoEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(CampoDataDevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CampoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel4))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirmar)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addGap(36, 36, 36))
+                    .addComponent(Cancelar))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -262,7 +278,7 @@ public class TelaLoca extends javax.swing.JInternalFrame {
     private void AddEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEquipamentosActionPerformed
         // TODO add your handling code here:
         try {
-            TelaLocaEquip tle = new TelaLocaEquip(this);
+            TelaLocaEquip tle = new TelaLocaEquip(qtdDias, valor, this, modelo, equipsList, CampoValor, AddEquipamentos);
             tle.setVisible(true);
             jd.add(tle);
             AddEquipamentos.setEnabled(false);
@@ -287,7 +303,7 @@ public class TelaLoca extends javax.swing.JInternalFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         
-        System.out.println(equips.toString());
+        System.out.println(equipsList.toString());
         
         
         
@@ -295,8 +311,9 @@ public class TelaLoca extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Você deixou algum dado em branco?");
         else{
             try {
-                f.locEquips(dataLoca, codCLiente, equips, dataDevo, valor);
+                f.locEquips(dataLoca, codCLiente, equipsList, dataDevo, valor);
                 JOptionPane.showMessageDialog(this, "Operação realizada com Sucesso");
+                f.instaciaCaixa().somaSaldo(valor);
                 this.dispose();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TelaLoca.class.getName()).log(Level.SEVERE, null, ex);
@@ -324,6 +341,7 @@ public class TelaLoca extends javax.swing.JInternalFrame {
 
     private void CampoDataDevoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoDataDevoKeyReleased
         // TODO add your handling code here:
+        Double valorTotal;
         if (CampoDataDevo.getText().charAt(9) != ' ') {
             try {
                 dataDevo = sdf.parse(CampoDataDevo.getText());
@@ -331,13 +349,13 @@ public class TelaLoca extends javax.swing.JInternalFrame {
                 if (dataDevo.getTime() < dataLoca.getTime()) {
                     JOptionPane.showMessageDialog(this, "A data de devolução deve ser maior que a data da locação!");
                 } else {
-                    if (dataDevo.getTime() - dataLoca.getTime() != 0) {
+                    
                         qtdDias = (int) ((dataDevo.getTime() - dataLoca.getTime()) / 86400000L);
                         qtdDias +=1;
-                        valor *= qtdDias;
-                        
-                        CampoValor.setText(valor.toString());
-                    }
+                        valorTotal = valor * qtdDias;
+                        System.err.println("data adicionada qtdDias "+qtdDias+" e valor "+valor);
+                        CampoValor.setText(valorTotal.toString());
+                    
 
                 }
             } catch (ParseException ex) {
@@ -347,26 +365,31 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_CampoDataDevoKeyReleased
 
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEquipamentos;
-    private javax.swing.JTextField CampoCliente;
     private javax.swing.JFormattedTextField CampoDataDevo;
     private javax.swing.JFormattedTextField CampoDataLoca;
-    private javax.swing.JTextField CampoEquip;
     private javax.swing.JTextField CampoValor;
+    private javax.swing.JButton Cancelar;
     private javax.swing.JButton Confirmar;
+    private javax.swing.JTable TabEquipsLoca;
+    private javax.swing.JTextField a;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton selectCliente;
     // End of variables declaration//GEN-END:variables
 
@@ -378,26 +401,12 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         this.CampoValor = CampoValor;
     }
 
-    public JTextField getCampoEquip() {
-        return CampoEquip;
-    }
-
-    public void setCampoEquip(JTextField CampoEquip) {
-        this.CampoEquip = CampoEquip;
-    }
-
- 
-
-
-    
 
     public JTextField getCampoCliente() {
-        return CampoCliente;
+        return a;
     }
 
-    public JButton getAddEquipamentos() {
-        return AddEquipamentos;
-    }
+
 
     public JButton getSelectCliente() {
         return selectCliente;
@@ -411,16 +420,6 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         this.codCLiente = codCLiente;
     }
 
-    public ArrayList<Integer> getEquips() {
-        return equips;
-    }
-
-    public void setEquips(ArrayList<Integer> equips) {
-        this.equips = equips;
-    }
-
-
-    
     public Double getValor() {
         return valor;
     }
@@ -429,11 +428,5 @@ public class TelaLoca extends javax.swing.JInternalFrame {
         this.valor = valor;
     }
 
-    public int getQtdDias() {
-        return qtdDias;
-    }
 
-    public void setQtdDias(int qtdDias) {
-        this.qtdDias = qtdDias;
-    }
 }

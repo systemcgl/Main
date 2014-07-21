@@ -8,6 +8,8 @@ package br.com.systemcgl.screens;
 
 import br.com.systemcgl.Fachada;
 import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ import net.proteanit.sql.DbUtils;
 public class TelaCadCli extends javax.swing.JInternalFrame {
     JTable jt = new JTable();
     Fachada f = new Fachada();
+    ResultSet rs;
     /**
      * Creates new form TelaCadCli
      */
@@ -28,9 +31,9 @@ public class TelaCadCli extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    public TelaCadCli( JTable jt) {
+    public TelaCadCli( JTable jt, ResultSet rs) {
         this();
-        
+        this.rs = rs;
         this.jt = jt;
     }
 
@@ -221,28 +224,43 @@ public class TelaCadCli extends javax.swing.JInternalFrame {
         String cidade = CampoCidade.getText();
         String estado = CampoEstado.getText().toUpperCase();
         String tel = CampoTel.getText();
-      
-        System.out.println(cpf.length());
-        if (nome.equals("") || rg.equals(" .   .   ") || cpf.equals("   .   .   -  ") || endereco.equals("") || cidade.equals("") || estado.equals("") || tel.equals("(  )     -    ")){
-            JOptionPane.showMessageDialog(this, "Você deixou algum campo em branco?");
+        boolean cpfExistente = false;
+        try {
+            while (rs.next()) {
+                System.err.println(rs.getString("cpf")); 
+                if (rs.getString("CPF").equals(cpf)) {
+                    cpfExistente = true;
+                }
+                System.out.println("entrou no rs");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadCli.class.getName()).log(Level.SEVERE, null, ex);
             
-        }else {
-            if(rg.length() != 9 || cpf.length() !=14){
-                JOptionPane.showMessageDialog(this, "Vireifique o RG ou CPF informados!");
-            }else {
-                try {
-                    f.cadCli(nome, rg, cpf, endereco, cidade, estado, tel);
-                    JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
-                    this.dispose();
-                    jt.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
-                } catch (HeadlessException e) {
-                    System.err.println(e);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaCadCli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (cpfExistente) {
+            JOptionPane.showMessageDialog(this, "Este cpf ja está cadastrado no Banco de Dados");
+        } else {
+            System.out.println(cpf.length());
+            if (nome.equals("") || rg.equals(" .   .   ") || cpf.equals("   .   .   -  ") || endereco.equals("") || cidade.equals("") || estado.equals("") || tel.equals("(  )     -    ")) {
+                JOptionPane.showMessageDialog(this, "Você deixou algum campo em branco?");
+
+            } else {
+                if (rg.length() != 9 || cpf.length() != 14) {
+                    JOptionPane.showMessageDialog(this, "Vireifique o RG ou CPF informados!");
+                } else {
+                    try {
+                        f.cadCli(nome, rg, cpf, endereco, cidade, estado, tel);
+                        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
+                        this.dispose();
+                        jt.setModel(DbUtils.resultSetToTableModel(f.tabClientes()));
+                    } catch (HeadlessException e) {
+                        System.err.println(e);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(TelaCadCli.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
-        
     }//GEN-LAST:event_CadastrarActionPerformed
 
 

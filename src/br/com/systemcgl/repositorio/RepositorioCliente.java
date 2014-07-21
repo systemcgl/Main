@@ -48,7 +48,7 @@ public class RepositorioCliente {
     
     public ResultSet mostraClientes() throws ClassNotFoundException {
        conect = ConectaBD.conect();
-       String sql = "select codCliente as Código, nome as Nome, pendencias as Pendências from cliente";
+       String sql = "select codCliente as Código, nome as Nome, cpf as CPF, pendencias as Pendências from cliente";
        
         try {
             pst = conect.prepareStatement(sql);
@@ -62,6 +62,7 @@ public class RepositorioCliente {
  
         
     }
+
     
     public Cliente getCliente(int cod) throws SQLException, ClassNotFoundException {
         conect = ConectaBD.conect();

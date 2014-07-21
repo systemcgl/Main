@@ -26,7 +26,7 @@ public class Fachada {
     private ControleEquipamento ctE = new ControleEquipamento();
     private ControleCliente ctC = new ControleCliente();
     private ControleLocacao ctl = new ControleLocacao();
-    
+    private ControleCaixa ctcx;
     public boolean cadUser (String nome, String id, String senha) throws ClassNotFoundException{
       
        boolean n = ctU.salvarUsuario(nome, id, senha);
@@ -59,7 +59,8 @@ public class Fachada {
         
     }
     
-    public Sessao login(Usuario usr) throws ClassNotFoundException{
+    public Sessao login(String id, String senha) throws ClassNotFoundException{
+        Usuario usr = new Usuario(id, senha);
         return ctSs.sessaoId(usr);
         
     }
@@ -148,18 +149,27 @@ public class Fachada {
         
     }
     
-    public void saldo () {
-        
+    public void setSaldo(double valor){
+        ctcx.getInstance().somaSaldo(valor);
+    }
+    public Double getSaldo () {
+        return ctcx.getInstance().getSaldo();
     }
     
-    public void aCaixa () {
+    public  ControleCaixa instaciaCaixa () {
+        
+        return ctcx.getInstance(); 
+    }
+    public void abrirCaixa(){
+        ctcx.getInstance().setAberto();
         
     }
-    
-    public void fCaixa () {
-        
+    public void fecharCaixa () {
+        ctcx.getInstance().fecharCaixa();
     }
-    
+    public boolean caixaIsOpen(){
+        return ctcx.getInstance().isAberto();
+    }
     public void backup () {
         
     }

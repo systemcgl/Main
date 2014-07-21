@@ -19,7 +19,7 @@ import java.sql.SQLException;
  */
 public class ControleUsuario {
  
-   
+ RepositorioUsuario ru = new RepositorioUsuario();  
    
    
 
@@ -39,13 +39,13 @@ public class ControleUsuario {
           if (nome.equals("Administrador")) {
               Administrador user = new Administrador(nome, id, senha);
               System.out.println("Obj user criado ");
-              RepositorioUsuario rpUsr = new RepositorioUsuario();
-              rpUsr.svUsr(user);
+              
+              ru.svUsr(user);
           } else {
               Usuario user = new Usuario(nome, id, senha);
-              System.out.println("Obj user criado ");
-              RepositorioUsuario rpUsr = new RepositorioUsuario();
-              rpUsr.svUsr(user);
+              System.out.println("Obj user criado");
+              
+              ru.svUsr(user);
           }
           
           return true;
@@ -58,7 +58,7 @@ public class ControleUsuario {
   public ResultSet listarUsuarios() throws ClassNotFoundException {
       
       
-      RepositorioUsuario ru = new RepositorioUsuario();
+      
       
       
       return ru.getTDados();
@@ -70,7 +70,7 @@ public class ControleUsuario {
   public boolean rmUser ( Usuario usr) throws ClassNotFoundException{
       
       
-     RepositorioUsuario ru = new RepositorioUsuario();
+     
      
      ru.removeUsrDB(usr.getId());
      
@@ -80,6 +80,9 @@ public class ControleUsuario {
   }
           
           
-          
+   public String getTipo(String id) throws ClassNotFoundException{
+       
+       return ru.selectTipo(id);
+   }       
   
 }

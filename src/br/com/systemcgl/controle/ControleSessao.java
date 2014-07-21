@@ -14,12 +14,12 @@ import br.com.systemcgl.entidades.Usuario;
  */
 public class ControleSessao {
     Sessao s = new Sessao();
-    
+    ControleUsuario ctu = new ControleUsuario();
     
     public Sessao sessaoId (Usuario usr) throws ClassNotFoundException {
         
         s.setId(usr.getId());
-        if ("admin".equals(usr.getId())) {
+        if (ctu.getTipo(usr.getId()).equals("admin")) {
             s.setAdm(true);
         } else {
             s.setAdm(false);
@@ -34,4 +34,5 @@ public class ControleSessao {
     }
     
  
+    
 }

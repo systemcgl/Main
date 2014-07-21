@@ -108,4 +108,23 @@ public class RepositorioUsuario  {
         }
 
        }
+    
+    public String selectTipo(String id) throws ClassNotFoundException{
+        String tipo = "";
+        conect = ConectaBD.conect();
+        String sql  = "select tipo from usuario where idUsuario=?";
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setString(1, id );
+            rs = pst.executeQuery();
+            while (rs.next()){
+                tipo = rs.getString("tipo");
+            }
+            
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return tipo;
+    }
 }
+

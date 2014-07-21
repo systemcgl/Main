@@ -6,8 +6,11 @@
 
 package br.com.systemcgl.screens;
 
+import br.com.systemcgl.Fachada;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -22,6 +25,9 @@ import net.proteanit.sql.DbUtils;
 public class MenuPrincipal extends javax.swing.JFrame {
     boolean isAdm;
     String id;
+
+
+    Fachada f ;
     /**
      * Creates new form MenuPrincipal
      */
@@ -30,8 +36,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
-    public MenuPrincipal(boolean isAdm, String id) {
+    public MenuPrincipal(boolean isAdm, String id, Fachada f) {
         this();
+        this.f = f;
         this.isAdm = isAdm;
         this.id = id;
         UsuarioLabel2.setText(id);
@@ -65,6 +72,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuEquip = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Systemcgl");
@@ -133,6 +141,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Caixa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Caixa.setMaximumSize(new java.awt.Dimension(60, 60));
         Caixa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaixaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(Caixa);
 
         UsuarioLabel1.setText("Usuário:");
@@ -216,6 +229,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Ajuda");
+
+        jMenuItem3.setText("Manual do Usuário");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -240,7 +262,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void LocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocaActionPerformed
         // TODO add your handling code here:
-        TelaLoca tl = new TelaLoca(jDesktopPane);
+       if(f.caixaIsOpen()){
+        TelaLoca tl = new TelaLoca(jDesktopPane, f);
         tl.setVisible(true);
         jDesktopPane.add(tl);
         try {
@@ -248,6 +271,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }else {
+           JOptionPane.showMessageDialog(this, "Você precisa abrir o caixa para efetuar essa operação");
+       }
     }//GEN-LAST:event_LocaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -257,18 +283,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuariosActionPerformed
         // Abre tela para editar usuários
        if (isAdm == true) {
-                   TelaUsers users = null;
-        try {
-            new TelaUsers(this).setVisible(true);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-                } else {
-                    JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
-        this.setEnabled(false);
-       
-        
-       }
+            TelaUsers users;
+            try {
+                new TelaUsers(this).setVisible(true);
+                this.setEnabled(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Você não tem permissão para efetuar essa operação");
+
+        }
         
     }//GEN-LAST:event_UsuariosActionPerformed
 
@@ -283,7 +308,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void EquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquipamentosActionPerformed
        
-               TelaEquipamentos te ;
+               TelaEquipamentos te;
         try {
             te = new TelaEquipamentos(jDesktopPane);
             te.setVisible(true);
@@ -326,17 +351,50 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void DevEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevEquipActionPerformed
         // TODO add your handling code here:
+
         TelaDevo td;
 
         try {
-            td = new TelaDevo();
+            td = new TelaDevo(f);
             td.setVisible(true);
             jDesktopPane.add(td);
         } catch (ClassNotFoundException | ParseException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         
     }//GEN-LAST:event_DevEquipActionPerformed
+
+    private void CaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaixaActionPerformed
+        // TODO add your handling code here:
+        if (isAdm) {
+            TelaCaixa tcaixa;
+            tcaixa = new TelaCaixa(this, f);
+            tcaixa.setVisible(true);
+            this.setEnabled(false);
+        } else {
+            TelaAutenticacao ta;
+            ta = new TelaAutenticacao(this,f);
+            ta.setVisible(true);
+            this.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_CaixaActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            // TODO add your handling code here:
+           
+          String dir = System.getProperty("user.dir");
+          System.out.println(dir);
+          java.awt.Desktop.getDesktop().open( new File(dir+"/Systemcgl_Manual.pdf") );
+        } catch (IOException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,7 +450,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuEquip;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
+    public Fachada getF() {
+        return f;
+    }
+
+    public void setF(Fachada f) {
+        this.f = f;
+    }
 }

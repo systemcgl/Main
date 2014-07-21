@@ -7,22 +7,41 @@
 package br.com.systemcgl.screens;
 import br.com.systemcgl.Fachada;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 /**
  *
  * @author zare
  */
 public class TelaLocaEquip extends javax.swing.JInternalFrame {
-
+    DefaultTableModel modeloTelaAnterior;
     Fachada f= new Fachada();
     TelaLoca telaAnterior;
     Integer codEquip; 
-    String eq;
-    String eqs;
-    Double valor = 0.0;
+    String nomeEq;
+    
+    String disponibilidade;
+    
     double valoradd;
+    
+
+    //Objetos e variaveis da tela anterior
+    private ArrayList<Integer> equipsList;
+    private int qtdDias;
+    private Double valor;
+    private JTextField CampoValor;
+    
+    private JButton AddEquipsTelaAnterior;
+    
+    
+    
     /**
      * Creates new form TelaLocaEquip
      * @throws java.lang.ClassNotFoundException
@@ -34,10 +53,15 @@ public class TelaLocaEquip extends javax.swing.JInternalFrame {
         TabelaEquip.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip()));
     }
 
-    public TelaLocaEquip (TelaLoca ta) throws ClassNotFoundException, SQLException{
+    public TelaLocaEquip (int qtdDias, Double valor, TelaLoca ta, DefaultTableModel modelo, ArrayList<Integer> equipsList, JTextField CampoValor, JButton AddEquipsTelaAnterior) throws ClassNotFoundException, SQLException{
         this();
         telaAnterior = ta;
-        
+        this.modeloTelaAnterior = modelo;
+        this.qtdDias = qtdDias;
+        this.valor = valor;
+        this.equipsList = equipsList;
+        this.CampoValor = CampoValor;
+        this.AddEquipsTelaAnterior = AddEquipsTelaAnterior;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,30 +142,32 @@ public class TelaLocaEquip extends javax.swing.JInternalFrame {
 
     private void FecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FecharActionPerformed
         // TODO add your handling code here:
+   
         
+        CampoValor.setText(valor.toString());
+        
+        
+        AddEquipsTelaAnterior.setEnabled(true);
         this.dispose();
-        eqs = telaAnterior.getCampoEquip().getText();
-      
-        //remover 2 ultimos caracteres (" " e ",") da string
-        eqs = eqs.substring(0,eqs.length()-1);
-        eqs = eqs.substring(0,eqs.length()-1);
-        
-        telaAnterior.getCampoValor().setText(telaAnterior.getValor().toString()+"0");
-        
-        telaAnterior.getCampoEquip().setText(eqs);
-        telaAnterior.getAddEquipamentos().setEnabled(true);
         
     }//GEN-LAST:event_FecharActionPerformed
 
     private void AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarActionPerformed
-        // atribui o nome e o codigo do equipamento , ambos como string
-        telaAnterior.getEquips().add(codEquip);
-        telaAnterior.getCampoEquip().setText(telaAnterior.getCampoEquip().getText()+eq+", ");
-        //Somar valores dos equipamentos
-        if (telaAnterior.getQtdDias() != 0 ){
-            valoradd*= (double)telaAnterior.getQtdDias();
+        if (disponibilidade.equals("Não")) {
+            JOptionPane.showMessageDialog(this, "Voce não pode adicionar um produto indisponível");
+        } else {
+            // atribui o nome e o codigo do equipamento , ambos como string
+            equipsList.add(codEquip);
+            modeloTelaAnterior.addRow(new Object[]{nomeEq});
+
+            //Somar valores dos equipamentos
+            if (qtdDias != 1) {
+                valoradd *= qtdDias;
+            }
+            valor += valoradd;
+            telaAnterior.setValor(valor);
+            System.err.println("telaLocaequip valor "+valor);
         }
-        telaAnterior.setValor(telaAnterior.getValor()+valoradd);
     }//GEN-LAST:event_AdicionarActionPerformed
 
     private void TabelaEquipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEquipMouseClicked
@@ -151,10 +177,11 @@ public class TelaLocaEquip extends javax.swing.JInternalFrame {
         String vltemp;
         int seleciona = TabelaEquip.getSelectedRow();
         codTemp = TabelaEquip.getModel().getValueAt(seleciona, 0).toString();
-        eq = TabelaEquip.getModel().getValueAt(seleciona, 1).toString();
+        nomeEq = TabelaEquip.getModel().getValueAt(seleciona, 1).toString();
         vltemp = TabelaEquip.getModel().getValueAt(seleciona, 5).toString();
         codEquip = Integer.parseInt(codTemp);
-        valoradd = Double.parseDouble(vltemp);        
+        valoradd = Double.parseDouble(vltemp);      
+        disponibilidade = TabelaEquip.getModel().getValueAt(seleciona, 6).toString();
     }//GEN-LAST:event_TabelaEquipMouseClicked
 
 

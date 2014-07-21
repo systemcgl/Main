@@ -26,6 +26,7 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
         this.getRootPane().setDefaultButton(Entrar);
+        
     }
 
     /**
@@ -142,8 +143,9 @@ public class TelaLogin extends javax.swing.JFrame {
             if (id.equals("") || pass.equals("")) {
                 JOptionPane.showMessageDialog(this, "Você deixou algo em branco?");
             } else {
-                if (f.login(usr).isAuth()) {
-                    MenuPrincipal inicial = new MenuPrincipal(f.login(usr).isAdm(), usr.getId());
+                if (f.login(id,pass).isAuth()) {
+                    
+                    MenuPrincipal inicial = new MenuPrincipal(f.login(id,pass).isAdm(), id, f);
                     inicial.setVisible(true);
                     this.dispose();
                 }else 

@@ -26,16 +26,21 @@ public class TelaDevo extends javax.swing.JInternalFrame {
     private Double multa;
     private Date dataAtual = new Date(System.currentTimeMillis());
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    private Fachada f = new Fachada();
+    private Fachada f;
     /**
      * Creates new form TelaDevo
      */
     public TelaDevo() throws ClassNotFoundException, ParseException {
         initComponents();
+        
+    }
+
+    public TelaDevo(Fachada f) throws ClassNotFoundException, ParseException{
+        this();
+        this.f = f;
         TabelaLocacao.setModel(DbUtils.resultSetToTableModel(f.mostraTabelaLoca()));
         dataAtual = sdf.parse(sdf.format(dataAtual));
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,6 +146,7 @@ public class TelaDevo extends javax.swing.JInternalFrame {
             
             f.devEquip(codLocacao);
             JOptionPane.showMessageDialog(this, "Operação realizada com sucesso!");
+            f.instaciaCaixa().somaSaldo(multa);
             this.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelaDevo.class.getName()).log(Level.SEVERE, null, ex);
