@@ -55,6 +55,10 @@ public class TelaDevo extends javax.swing.JInternalFrame {
         ConfirmarDevo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         labelMulta = new javax.swing.JLabel();
+        CampoBusca = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        Cancelar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -87,33 +91,68 @@ public class TelaDevo extends javax.swing.JInternalFrame {
 
         labelMulta.setText("0.00");
 
+        CampoBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CampoBuscaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CampoBuscaKeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Pesquisa:");
+
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("R$");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelMulta)
-                        .addGap(429, 429, 429)
-                        .addComponent(ConfirmarDevo))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(3, 3, 3)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(labelMulta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Cancelar)
+                            .addGap(18, 18, 18)
+                            .addComponent(ConfirmarDevo))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(CampoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CampoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ConfirmarDevo)
                     .addComponent(jLabel2)
-                    .addComponent(labelMulta))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(labelMulta)
+                    .addComponent(Cancelar)
+                    .addComponent(jLabel3))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,6 +172,9 @@ public class TelaDevo extends javax.swing.JInternalFrame {
             
             dataDevo = sdf.parse(TabelaLocacao.getModel().getValueAt(seleciona, 3).toString());
             qtdDiasAtraso = (int)((dataAtual.getTime() - dataDevo.getTime())/86400000);
+            if (qtdDiasAtraso == 1){
+                multa = 0.00;
+            }
             multa = valor*qtdDiasAtraso;
             labelMulta.setText(multa.toString());
         } catch (ParseException ex) {
@@ -156,11 +198,38 @@ public class TelaDevo extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_ConfirmarDevoActionPerformed
 
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
+
+    private void CampoBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoBuscaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoBuscaKeyPressed
+
+    private void CampoBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoBuscaKeyReleased
+        // TODO add your handling code here:
+        String busca = CampoBusca.getText();
+        try {
+
+            TabelaLocacao.setModel(DbUtils.resultSetToTableModel(f.busca("loca", busca)));
+            if (busca.equals("")) {
+                TabelaLocacao.setModel(DbUtils.resultSetToTableModel(f.mostraTabelaLoca()));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CampoBuscaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CampoBusca;
+    private javax.swing.JButton Cancelar;
     private javax.swing.JButton ConfirmarDevo;
     private javax.swing.JTable TabelaLocacao;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelMulta;
     // End of variables declaration//GEN-END:variables

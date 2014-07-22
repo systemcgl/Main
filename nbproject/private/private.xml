@@ -14,6 +14,7 @@
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipamento.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioEquipsLoca.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/repositorio/RepositorioUsuario.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaDetalhes.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/Fachada.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLocaEquip.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleCliente.java</file>
@@ -24,10 +25,13 @@
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaAutenticacao.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaLocaCli.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleEquipamento.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleBusca.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCadEquip.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaEquipamentos.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaClientes.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/TabelaLoca.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/entidades/Usuario.java</file>
+            <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/screens/TelaCadCli.java</file>
             <file>file:/media/zFiles/SoftwareProjetos/Java/NetbeansProjects/systemcgl/src/br/com/systemcgl/controle/ControleSessao.java</file>
         </group>
     </open-files>

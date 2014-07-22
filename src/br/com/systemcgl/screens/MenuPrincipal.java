@@ -73,6 +73,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        Sobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Systemcgl");
@@ -238,6 +239,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
+        Sobre.setText("Sobre");
+        Sobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SobreActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Sobre);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -396,6 +405,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void SobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SobreActionPerformed
+        // TODO add your handling code here:
+        new TelaDetalhes(this).setVisible(true);
+        this.setEnabled(false);
+        
+    }//GEN-LAST:event_SobreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -438,6 +454,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu EditUser;
     private javax.swing.JButton Equipamentos;
     private javax.swing.JButton Loca;
+    private javax.swing.JMenuItem Sobre;
     private javax.swing.JLabel UsuarioLabel1;
     private javax.swing.JLabel UsuarioLabel2;
     private javax.swing.JMenuItem Usuarios;

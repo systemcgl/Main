@@ -64,6 +64,28 @@ public class RepositorioEquipamento {
         
     }
     
+        public ResultSet pesquisaEquip(String nome) throws ClassNotFoundException {
+        conect = ConectaBD.conect();
+        
+        String sql = "select codEquipamento as Código,"
+                + " nome as Descrição, marca as Marca,"
+                + " modelo as Modelo, serial as Serial,"
+                + " valor as Valor,"
+                + " disponivel as Disponibilidade from equipamento where nome like ?";
+        
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setString(1, "%"+nome+"%");
+            rs = pst.executeQuery();
+            System.out.println("Recebendo equipamentos do BD");
+            return rs;
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+        
+    }
     
 
     public void delEquip(int cod) throws ClassNotFoundException {

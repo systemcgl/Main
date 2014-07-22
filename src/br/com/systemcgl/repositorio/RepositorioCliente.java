@@ -43,7 +43,6 @@ public class RepositorioCliente {
         }
         
         
-        
     }
     
     public ResultSet mostraClientes() throws ClassNotFoundException {
@@ -63,6 +62,22 @@ public class RepositorioCliente {
         
     }
 
+    public ResultSet pesquisaClientes(String nome) throws ClassNotFoundException {
+        conect = ConectaBD.conect();
+        String sql = "select codCliente as Código, nome as Nome, cpf as CPF, pendencias as Pendências from cliente where nome like ?";
+
+        try {
+            pst = conect.prepareStatement(sql);
+            pst.setString(1, "%"+nome+"%");
+            rs = pst.executeQuery();
+            System.out.println("requisitando dados de clientes...");
+            return rs;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return null;
+        }
+
+    }
     
     public Cliente getCliente(int cod) throws SQLException, ClassNotFoundException {
         conect = ConectaBD.conect();

@@ -91,6 +91,33 @@ public class RepositorioLocacao {
         }
         return rs;
     }
+        public ResultSet pesquisaLocacao (String nomeCliente) throws ClassNotFoundException{
+        connect = ConectaBD.conect();
+        String sql = "select  "
+                
+                + "locacao.codLocacao as Código, "
+                + "cliente.nome as Cliente, "
+                + "locacao.dataLocacao as \"Data locação\", "
+                + "locacao.dataDevolucao as \"Data devolução\", "
+                + "locacao.valor as Valor, "
+                + "locacao.situacao as Situação "
+                
+                + "from locacao "
+                + "inner join cliente on "
+                + "cliente.codCliente = locacao.codCliente"
+                + "where cliente.nome like concat(?,?,?)";
+        
+        try {
+            pst = connect.prepareStatement(sql);
+            pst.setString(1,"%");
+            pst.setString(2,nomeCliente);
+            pst.setString(3,"%");
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return rs;
+    }
     
     public void alterSituacaoLocacao( int codLocacao) throws ClassNotFoundException{
         connect = ConectaBD.conect();

@@ -27,6 +27,8 @@ public class Fachada {
     private ControleCliente ctC = new ControleCliente();
     private ControleLocacao ctl = new ControleLocacao();
     private ControleCaixa ctcx;
+    private ControleBusca cb = new ControleBusca();
+    private ResultSet rs;
     public boolean cadUser (String nome, String id, String senha) throws ClassNotFoundException{
       
        boolean n = ctU.salvarUsuario(nome, id, senha);
@@ -141,8 +143,10 @@ public class Fachada {
         
     }
     
-    public void busca () {
+    public ResultSet busca (String tipo, String termo) throws ClassNotFoundException {
+        rs = cb.buscarNoBD(tipo, termo);
         
+        return rs;
     }
     
     public void orc (){

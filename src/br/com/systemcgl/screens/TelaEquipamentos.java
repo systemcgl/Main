@@ -56,11 +56,10 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableEquip = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        CampoBusca = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Editar = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
@@ -93,6 +92,15 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(JTableEquip);
 
+        CampoBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CampoBuscaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CampoBuscaKeyReleased(evt);
+            }
+        });
+
         jLabel1.setText("Pesquisa:");
 
         Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Edit-20x20.png"))); // NOI18N
@@ -111,9 +119,6 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/search20x20.png"))); // NOI18N
-        jButton1.setText("Buscar");
-
         Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/systemcgl/icones/Add-Alt-20x20.png"))); // NOI18N
         Cadastrar.setText("Cadastrar");
         Cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,13 +134,11 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(CampoBusca))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Editar)
                         .addGap(18, 18, 18)
@@ -154,13 +157,12 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
                     .addComponent(Remover)
                     .addComponent(Cadastrar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(24, 24, 24))
+                    .addComponent(CampoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(25, 25, 25))
         );
 
         getAccessibleContext().setAccessibleDescription("Equipamentos");
@@ -222,15 +224,36 @@ public class TelaEquipamentos extends javax.swing.JInternalFrame {
         jd.add(cadEquip);
     }//GEN-LAST:event_CadastrarActionPerformed
 
+    private void CampoBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoBuscaKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_CampoBuscaKeyPressed
+
+    private void CampoBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoBuscaKeyReleased
+        // TODO add your handling code here:
+        
+        String busca = CampoBusca.getText();
+        try {
+
+            JTableEquip.setModel(DbUtils.resultSetToTableModel(f.busca("equip", busca)));
+            if (busca.equals("")) {
+                JTableEquip.setModel(DbUtils.resultSetToTableModel(f.mostraTEquip()));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaEquipamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CampoBuscaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
+    private javax.swing.JTextField CampoBusca;
     private javax.swing.JButton Editar;
     private javax.swing.JTable JTableEquip;
     private javax.swing.JButton Remover;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
